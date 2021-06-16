@@ -1,0 +1,25 @@
+{
+  "name": "school-management",
+  "version": "1.0.0",
+  "description": "school management system",
+  "main": "index.js",
+  "scripts": {
+    "test": "run-tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keptac/school-management.git"
+  },
+  "keywords": [
+    "school",
+    "management",
+    "system",
+    "elearning"
+  ],
+  "author": "kelvin chelenje",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keptac/school-management/issues"
+  },
+  "homepage": "https://github.com/keptac/school-management#readme"
+}
