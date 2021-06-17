@@ -1,6 +1,5 @@
 'use strict';
 module.exports = function(app) {
-    var todoList = require('../controllers/todoListController');
 
     var announcements = require('../controllers/announcementsController');
     var resources = require('../controllers/resourceController');
@@ -23,10 +22,10 @@ module.exports = function(app) {
     //Assignments
     app.route('/api/esm/assignments')
         .post(assignments.uploadAssignment);
-
+        
     app.route('/api/esm/assignments/subject/:subjectCode')
         .get(assignments.listAssignmentsBySubjectCode);
-
+        
     app.route('/api/esm/assignments/:assignmentId')
         .get(assignments.readAssignment)
         .put(assignments.updateAssignment)
@@ -36,25 +35,14 @@ module.exports = function(app) {
     //Learning Resources
     app.route('/api/esm/resources')
         .post(resources.uploadResource);
-
+        
     app.route('/api/esm/resources/subject/:subjectCode')
         .get(resources.listResourcesBySubjectCode);
         
     app.route('/api/esm/resources/:resourceId')
         .get(resources.readResource)
-        .put(resources.updateResource)
+        .pust(resources.updateResource)
         .delete(resources.deleteResource);
-
-
-    //Student Routes
-    // app.route('/api/esm/students')
-    //     .get(todoList.list_all_tasks)
-    //     .post(todoList.create_a_task);
-    
-    // app.route('/api/esm/students/:studentId')
-    //     .get(todoList.read_a_task)
-    //     .put(todoList.update_a_task)
-    //     .delete(todoList.delete_a_task);
 
 
     // Students registrations to classes
@@ -66,7 +54,7 @@ module.exports = function(app) {
     
     app.route('/api/esm/student-registrations/subject/:subjectCode')
         .get(studentSubjectRegistrations.listStudentRegistrationsPerSubject);
-
+        
     app.route('/api/esm/student-registrations/:studentRegistrationId')
         .delete(studentSubjectRegistrations.deleteStudentRegistration);
 
@@ -97,4 +85,15 @@ module.exports = function(app) {
     
     app.route('/api/esm/submissions/:submissionId')
         .get(submissions.readSubmission);
+
+        
+    //Student Routes
+    // app.route('/api/esm/students')
+    //     .get(todoList.list_all_tasks)
+    //     .post(todoList.create_a_task);
+    
+    // app.route('/api/esm/students/:studentId')
+    //     .get(todoList.read_a_task)
+    //     .put(todoList.update_a_task)
+    //     .delete(todoList.delete_a_task);
 };
