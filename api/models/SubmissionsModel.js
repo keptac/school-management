@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var SubmissionSchema = new Schema({
 
-    classCode: {
+    subjectCode: {
         type: String,
         required: 'Kindly enter the class code'
     },

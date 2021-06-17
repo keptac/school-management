@@ -8,9 +8,9 @@ var ResourceSchema = new Schema({
         required: 'Kindly enter the name of the resource'
     },
 
-    classCode: {
+    subjectCode: {
         type: String,
-        required: 'Kindly enter the classCode'
+        required: 'Kindly enter the subjectCode'
     },
 
     topicName: {

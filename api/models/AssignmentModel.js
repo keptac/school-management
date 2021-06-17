@@ -8,9 +8,9 @@ var AssignmentSchema = new Schema({
         required: 'Kindly enter the Title of the assignment'
     },
 
-    classCode: {
+    subjectCode: {
         type: String,
-        required: 'Kindly enter the classCode'
+        required: 'Kindly enter the subjectCode'
     },
 
     dueDate: {

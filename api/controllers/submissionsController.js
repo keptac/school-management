@@ -1,46 +1,36 @@
 'use strict';
 
-var mongoose = require('mongoose'), Task = mongoose.model('Tasks');
+var mongoose = require('mongoose'), Submission = mongoose.model('Submissions');
 
-exports.list_all_tasks = function(req, res) {
-    Task.find({}, function(err, task) {
-        if (err)
-        res.send(err);
-        res.json(task);
-    });
-};
-
-exports.create_a_task = function(req, res) {
-    var new_task = new Task(req.body);
-    new_task.save(function(err, task) {
+exports.listSubmissionsByAssignmentId = function(req, res) {
+    Submission.find({subjectCode: req.params.subjectCode}, function(err, submission) {
         if (err)
             res.send(err);
-        res.json(task);
+        res.json(submission);
     });
 };
 
-exports.read_a_task = function(req, res) {
-    Task.findById(req.params.taskId, function(err, task) {
+exports.submissionsForStudent = function(req, res) {
+    Submission.find({subjectCode: req.params.subjectCode, studentId: req.params.studentId}, function(err, submission) {
         if (err)
             res.send(err);
-        res.json(task);
+        res.json(submission);
     });
 };
 
-exports.update_a_task = function(req, res) {
-    Task.findOneAndUpdate({_id: req.params.taskId}, req.body, {new: true}, function(err, task) {
+exports.submitAssignment = function(req, res) {
+    var new_submission = new Submission(req.body);
+    new_submission.save(function(err, submission) {
         if (err)
             res.send(err);
-        res.json(task);
+        res.json(submission);
     });
 };
 
-exports.delete_a_task = function(req, res) {
-    Task.remove({
-        _id: req.params.taskId
-    }, function(err, task) {
+exports.readSubmission = function(req, res) {
+    Submission.findById(req.params.submissionId, function(err, submission) {
         if (err)
-        res.send(err);
-        res.json({ message: 'Task successfully deleted' });
+            res.send(err);
+        res.json(submission);
     });
 };

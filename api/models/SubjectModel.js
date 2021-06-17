@@ -8,7 +8,7 @@ var SubjectSchema = new Schema({
         required: 'Kindly enter the name of the subject'
     },
 
-    classCode: {
+    subjectCode: {
         type: String,
     },
 

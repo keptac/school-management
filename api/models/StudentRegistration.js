@@ -8,14 +8,9 @@ var StudentRegistrationSchema = new Schema({
         required: 'Kindly enter the name of the task'
     },
 
-    classId: {
+    subjectCode: {
         type: String,
-        required: 'Kindly enter Class ID'
-    },
-
-    subjectId: {
-        type: String,
-        required: 'Kindly enter Subject ID'
+        required: 'Kindly enter Subject Code'
     },
 
     dateJoined: {

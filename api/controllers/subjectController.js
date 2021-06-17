@@ -10,6 +10,14 @@ exports.listSubjects = function(req, res) {
     });
 };
 
+exports.listSubjectsPerTeacher = function(req, res) {
+    Subject.find({teacherId:req.body.teacherId}, function(err, subject) {
+        if (err)
+            res.send(err);
+        res.json(subject);
+    });
+};
+
 exports.createSubject = function(req, res) {
     var new_subject = new Subject(req.body);
     new_subject.save(function(err, subject) {
