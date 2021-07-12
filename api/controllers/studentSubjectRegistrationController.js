@@ -2,35 +2,52 @@
 
 let mongoose = require('mongoose'), StudentRegistration = mongoose.model('StudentRegistrations');
 
-exports.listStudentRegistrationsPerSubject = function(req, res) {
-    StudentRegistration.find({subjectCode: req.body.subjectCode}, function(err, studentRegistration) {
+exports.listStudentRegistrationsPerSubject = function (req, res) {
+    StudentRegistration.find({ subjectCode: req.params.subjectCode }, function (err, studentRegistration) {
         if (err)
             res.send(err);
         res.json(studentRegistration);
     });
 };
 
-exports.listRegistrationsPerStudent = function(req, res) {
-    StudentRegistration.find({studentId: req.body.studentId}, function(err, studentRegistration) {
+exports.listRegistrationsPerStudent = function (req, res) {
+    console.log(req.params.studentId)
+    StudentRegistration.find({ studentId: req.params.studentId }, function (err, studentRegistration) {
         if (err)
             res.send(err);
         res.json(studentRegistration);
     });
 };
 
-exports.enrolForSubject = function(req, res) {
-    let new_studentRegistration = new StudentRegistration(req.body);
-    new_studentRegistration.save(function(err, studentRegistration) {
+exports.enrolForSubject = function (req, res) {
+    let studentBody = {
+        subjectCode: req.body.subjectCode,
+        studentId: req.body.studentId,
+        studentSubjectCode: req.body.studentId + req.body.subjectCode
+    };
+
+    let new_studentRegistration = new StudentRegistration(studentBody);
+
+    new_studentRegistration.save(function (err, studentRegistration) {
+
         if (err)
-            res.send(err);
+            if (err.name === 'MongoError' && err.code === 11000) {
+                next(new Error('Student Already enrolled into this subject'));
+            } else {
+                next(err);
+                res.send(err);
+            }
+        
         res.json(studentRegistration);
     });
+
+
 };
 
-exports.deleteStudentRegistration = function(req, res) {
+exports.deleteStudentRegistration = function (req, res) {
     StudentRegistration.remove({
         _id: req.params.studentRegistrationId
-    }, function(err, studentRegistration) {
+    }, function (err, studentRegistration) {
         if (err)
             res.send(err);
         res.json({ message: 'Student Registration successfully deleted' });

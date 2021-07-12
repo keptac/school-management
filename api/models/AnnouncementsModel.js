@@ -1,6 +1,6 @@
 'use strict';
-import { Schema as _Schema, model } from 'mongoose';
-let Schema = _Schema;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
 let AnnouncementSchema = new Schema({
     message: {
@@ -13,4 +13,4 @@ let AnnouncementSchema = new Schema({
     },
 });
 
-export default model('Announcements', AnnouncementSchema);
+module.exports = mongoose.model('Announcements', AnnouncementSchema);

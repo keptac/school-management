@@ -1,8 +1,9 @@
 'use strict';
-import { Schema as _Schema, model } from 'mongoose';
-let Schema = _Schema;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
 let StudentRegistrationSchema = new Schema({
+
     studentId: {
         type: String,
         required: 'Kindly enter the name of the task'
@@ -13,9 +14,11 @@ let StudentRegistrationSchema = new Schema({
         required: 'Kindly enter Subject Code'
     },
 
-    dateJoined: {
-        type: Date,
-        default: Date.now
+    studentSubjectCode:{
+        type: String,
+        unique : true, 
+        dropDups: true,
+        required : true
     },
 
     status: {
@@ -24,7 +27,11 @@ let StudentRegistrationSchema = new Schema({
             enum: ['Enrolled', 'Pending', 'Defered']
         }],
         default: ['Enrolled']
+    },
+    dateJoined: {
+        type: Date,
+        default: Date.now,
     }
 });
 
-export default model('StudentRegistrations', StudentRegistrationSchema);
+module.exports = mongoose.model('StudentRegistrations', StudentRegistrationSchema);

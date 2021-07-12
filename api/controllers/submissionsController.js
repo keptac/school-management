@@ -30,7 +30,7 @@ exports.submitAssignment = function(req, res) {
 
 // Re-upload assignment - Student function
 exports.update_submission = function(req, res) {
-    Resource.findOneAndUpdate({_id: req.params.submissionId}, req.body, {new: true}, function(err, submission) {
+    Submission.findOneAndUpdate({_id: req.params.submissionId}, req.body, {new: true}, function(err, submission) {
         if (err)
             res.send(err);
         res.json(submission);
@@ -48,10 +48,21 @@ exports.readSubmission = function(req, res) {
 
 // Mark student Assignment
 exports.gradeSubmission = function(req, res) {
-    Resource.findOneAndUpdate({_id: req.params.submissionId}, req.body, {new: true}, function(err, submission) {
+    Submission.findOneAndUpdate({_id: req.params.submissionId}, req.body, {new: true}, function(err, submission) {
         if (err)
             res.send(err);
         res.json(submission);
+    });
+};
+
+
+exports.deleteSubmission = function(req, res) {
+    Submission.remove({
+        _id: req.params.submissionId
+    }, function(err, subject) {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Submission successfully deleted' });
     });
 };
 
