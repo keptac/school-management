@@ -1,8 +1,8 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import { Schema as _Schema, model } from 'mongoose';
+let Schema = _Schema;
 
-var AnnouncementSchema = new Schema({
+let AnnouncementSchema = new Schema({
     message: {
         type: String,
         required: 'Kindly enter the announcement'
@@ -13,4 +13,4 @@ var AnnouncementSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('Announcements', AnnouncementSchema);
+export default model('Announcements', AnnouncementSchema);

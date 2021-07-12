@@ -1,8 +1,8 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import { Schema as _Schema, model } from 'mongoose';
+let Schema = _Schema;
 
-var StudentRegistrationSchema = new Schema({
+let StudentRegistrationSchema = new Schema({
     studentId: {
         type: String,
         required: 'Kindly enter the name of the task'
@@ -27,4 +27,4 @@ var StudentRegistrationSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('StudentRegistrations', StudentRegistrationSchema);
+export default model('StudentRegistrations', StudentRegistrationSchema);

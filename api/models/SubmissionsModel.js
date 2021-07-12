@@ -1,8 +1,8 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import { Schema as _Schema, model } from 'mongoose';
+let Schema = _Schema;
 
-var SubmissionSchema = new Schema({
+let SubmissionSchema = new Schema({
 
     subjectCode: {
         type: String,
@@ -34,4 +34,4 @@ var SubmissionSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('Submissions', SubmissionSchema);
+export default model('Submissions', SubmissionSchema);

@@ -2,7 +2,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let StudentSchema = new Schema({
+let ProspectiveStudentSchema = new Schema({
     name: {
         type: String,
         required: 'Kindly enter the name of the student'
@@ -40,10 +40,14 @@ let StudentSchema = new Schema({
             enum: ['male', 'female']
         }],
     },
+    interviwedScheduled:{
+        type: Boolean,
+        default:true
+    },
     dateJoined: {
         type: Date,
         default: Date.now
     },
 });
 
-module.exports = mongoose.model('Students', StudentSchema);
+module.exports = mongoose.model('ProspectiveStudents', ProspectiveStudentSchema);

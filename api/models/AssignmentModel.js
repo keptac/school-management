@@ -1,8 +1,8 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import { Schema as _Schema, model } from 'mongoose';
+let Schema = _Schema;
 
-var AssignmentSchema = new Schema({
+let AssignmentSchema = new Schema({
     assignmentTitle: {
         type: String,
         required: 'Kindly enter the Title of the assignment'
@@ -38,4 +38,4 @@ var AssignmentSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('Assignments', AssignmentSchema);
+export default model('Assignments', AssignmentSchema);

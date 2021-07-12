@@ -18,6 +18,7 @@ exports.submissionsForStudent = function(req, res) {
     });
 };
 
+//Students submits the Assignment - student function
 exports.submitAssignment = function(req, res) {
     var new_submission = new Submission(req.body);
     new_submission.save(function(err, submission) {
@@ -27,6 +28,16 @@ exports.submitAssignment = function(req, res) {
     });
 };
 
+// Re-upload assignment - Student function
+exports.update_submission = function(req, res) {
+    Resource.findOneAndUpdate({_id: req.params.submissionId}, req.body, {new: true}, function(err, submission) {
+        if (err)
+            res.send(err);
+        res.json(submission);
+    });
+};
+
+//View single student assignment
 exports.readSubmission = function(req, res) {
     Submission.findById(req.params.submissionId, function(err, submission) {
         if (err)
@@ -34,3 +45,17 @@ exports.readSubmission = function(req, res) {
         res.json(submission);
     });
 };
+
+// Mark student Assignment
+exports.gradeSubmission = function(req, res) {
+    Resource.findOneAndUpdate({_id: req.params.submissionId}, req.body, {new: true}, function(err, submission) {
+        if (err)
+            res.send(err);
+        res.json(submission);
+    });
+};
+
+
+
+
+

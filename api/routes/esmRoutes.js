@@ -1,12 +1,12 @@
 'use strict';
-module.exports = function(app) {
 
-    var announcements = require('../controllers/announcementsController');
-    var resources = require('../controllers/resourceController');
-    var assignments = require('../controllers/assignmentsController');
-    var subjects = require('../controllers/subjectController');
-    var submissions = require('../controllers/submissionsController');
-    var studentSubjectRegistrations = require('../controllers/studentSubjectRegistrationController');
+export default function(app) {
+    let announcements = require('../controllers/announcementsController');
+    let resources = require('../controllers/resourceController');
+    let assignments = require('../controllers/assignmentsController');
+    let subjects = require('../controllers/subjectController');
+    let submissions = require('../controllers/submissionsController');
+    let studentSubjectRegistrations = require('../controllers/studentSubjectRegistrationController');
 
     //Announcement Routes
     app.route('/api/esm/announcements')
@@ -18,30 +18,29 @@ module.exports = function(app) {
         .put(announcements.update_an_announcement)
         .delete(announcements.delete_an_announcement);
 
-
     //Assignments
-    app.route('/api/esm/assignments')
+    app.route('/api/esm/teacher/assignments')
         .post(assignments.uploadAssignment);
         
-    app.route('/api/esm/assignments/subject/:subjectCode')
+    app.route('/api/esm/teacher/assignments/subject/:subjectCode')
         .get(assignments.listAssignmentsBySubjectCode);
         
-    app.route('/api/esm/assignments/:assignmentId')
+    app.route('/api/esm/teacher/assignments/:assignmentId')
         .get(assignments.readAssignment)
         .put(assignments.updateAssignment)
         .delete(assignments.deleteAssignment);
 
 
     //Learning Resources
-    app.route('/api/esm/resources')
+    app.route('/api/esm/teacher/resources')
         .post(resources.uploadResource);
         
-    app.route('/api/esm/resources/subject/:subjectCode')
+    app.route('/api/esm/teacher/resources/subject/:subjectCode')
         .get(resources.listResourcesBySubjectCode);
         
-    app.route('/api/esm/resources/:resourceId')
+    app.route('/api/esm/teacher/resources/:resourceId')
         .get(resources.readResource)
-        .pust(resources.updateResource)
+        .put(resources.updateResource)
         .delete(resources.deleteResource);
 
 
@@ -81,19 +80,12 @@ module.exports = function(app) {
         .get(submissions.listSubmissionsByAssignmentId);
 
     app.route('/api/esm/submissions/student/:subjectCode/:studentId')
-        .get(submissions.submissionsForStudent);
+        .get(submissions.submissionsForStudent)
+        .put(submissions.update_submission); 
     
     app.route('/api/esm/submissions/:submissionId')
-        .get(submissions.readSubmission);
+        .get(submissions.readSubmission)
+        .put(submissions.gradeSubmission)
+        .delete(submissions.delete_submission);
 
-        
-    //Student Routes
-    // app.route('/api/esm/students')
-    //     .get(todoList.list_all_tasks)
-    //     .post(todoList.create_a_task);
-    
-    // app.route('/api/esm/students/:studentId')
-    //     .get(todoList.read_a_task)
-    //     .put(todoList.update_a_task)
-    //     .delete(todoList.delete_a_task);
 };

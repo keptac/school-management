@@ -1,7 +1,6 @@
 'use strict';
 
-var mongoose = require('mongoose'), StudentRegistration = mongoose.model('StudentRegistrations');
-
+let mongoose = require('mongoose'), StudentRegistration = mongoose.model('StudentRegistrations');
 
 exports.listStudentRegistrationsPerSubject = function(req, res) {
     StudentRegistration.find({subjectCode: req.body.subjectCode}, function(err, studentRegistration) {
@@ -20,7 +19,7 @@ exports.listRegistrationsPerStudent = function(req, res) {
 };
 
 exports.enrolForSubject = function(req, res) {
-    var new_studentRegistration = new StudentRegistration(req.body);
+    let new_studentRegistration = new StudentRegistration(req.body);
     new_studentRegistration.save(function(err, studentRegistration) {
         if (err)
             res.send(err);
@@ -34,6 +33,6 @@ exports.deleteStudentRegistration = function(req, res) {
     }, function(err, studentRegistration) {
         if (err)
             res.send(err);
-        res.json({ message: 'StudentRegistration successfully deleted' });
+        res.json({ message: 'Student Registration successfully deleted' });
     });
 };

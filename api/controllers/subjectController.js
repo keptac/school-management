@@ -1,6 +1,6 @@
 'use strict';
 
-var mongoose = require('mongoose'), Subject = mongoose.model('Subjects');
+let mongoose = require('mongoose'), Subject = mongoose.model('Subjects');
 
 exports.listSubjects = function(req, res) {
     Subject.find({}, function(err, subject) {
@@ -19,7 +19,7 @@ exports.listSubjectsPerTeacher = function(req, res) {
 };
 
 exports.createSubject = function(req, res) {
-    var new_subject = new Subject(req.body);
+    let new_subject = new Subject(req.body);
     new_subject.save(function(err, subject) {
         if (err)
             res.send(err);
