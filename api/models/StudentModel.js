@@ -3,22 +3,35 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let StudentSchema = new Schema({
+    studentId:{
+        type: String,
+        required: 'Kindly provide the student ID',
+        unique: true,
+        dropDups:true
+    },
+
     name: {
         type: String,
         required: 'Kindly enter the name of the student'
     },
+
     surname: {
         type: String,
         required: 'Kindly enter the surname of the student'
     },
+
     idNumber: {
+        unique: true,
+        dropDups:true,
         type: String,
         required: 'Kindly enter the ID Number of the student'
     },
+
     address: {
         type: String,
         required: 'Kindly enter the address of the student'
     },
+
     guardianName: {
         type: String,
         required: 'Kindly enter the Guardian Name'
@@ -37,7 +50,7 @@ let StudentSchema = new Schema({
     gender: {
         type: [{
             type: String,
-            enum: ['male', 'female']
+            enum: ['MALE', 'FEMALE']
         }],
     },
     dateJoined: {

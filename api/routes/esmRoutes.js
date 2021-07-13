@@ -8,12 +8,14 @@ module.exports = function (app) {
     var assignments = require('../controllers/assignmentsController');
     var subjects = require('../controllers/subjectController');
     var submissions = require('../controllers/submissionsController');
-    var studentSubjectRegistrations = require('../controllers/studentSubjectRegistrationController');
+    var studentSubjectEnrolments = require('../controllers/studentSubjectEnrolmentController');
     var multiplechoice = require('../controllers/multipleChoiceController');
+    var students = require('../controllers/studentController');
     var upload = require('../middleware/upload');
 
     //Batches|Bulk uploads
-    app.post('/api/esm/batch-student-registations', upload, studentSubjectRegistrations.batchStudentsSubject);
+    app.post('/api/esm/batch-student-enrolment', upload, studentSubjectEnrolments.batchStudentsSubject);
+    app.post('/api/esm/batch-student-registation', upload, students.batchStudentsRegister);
 
     //Announcement Routes
     app.route('/api/esm/announcements')
@@ -50,17 +52,17 @@ module.exports = function (app) {
         .delete(resources.deleteResource);
 
     // Students enrolments to classes
-    app.route('/api/esm/student-registrations')
-        .post(studentSubjectRegistrations.enrolForSubject);
+    app.route('/api/esm/student-enrolment')
+        .post(studentSubjectEnrolments.enrolForSubject);
 
-    app.route('/api/esm/student-registrations/subject/:subjectCode')
-        .get(studentSubjectRegistrations.listStudentRegistrationsPerSubject);
+    app.route('/api/esm/student-enrolment/subject/:subjectCode')
+        .get(studentSubjectEnrolments.listStudentEnrolmentsPerSubject);
 
-    app.route('/api/esm/student-registrations/student/:studentId')
-        .get(studentSubjectRegistrations.listRegistrationsPerStudent);
+    app.route('/api/esm/student-enrolment/student/:studentId')
+        .get(studentSubjectEnrolments.listEnrolmentsPerStudent);
 
-    app.route('/api/esm/student-registrations/:studentRegistrationId')
-        .delete(studentSubjectRegistrations.deleteStudentRegistration);
+    app.route('/api/esm/student-enrolment/:studentEnrolmentId')
+        .delete(studentSubjectEnrolments.deleteStudentEnrolment);
 
 
     //Subjects Routes
@@ -78,7 +80,6 @@ module.exports = function (app) {
 
 
     //Submissions Routes
-
     app.route('/api/esm/submissions/subject/:subjectCode')
         .get(submissions.listSubmissionsByAssignmentId);
 
@@ -97,4 +98,13 @@ module.exports = function (app) {
 
     app.route('/api/esm/multiplechoice/:subjectCode/:testTitle')
         .get(multiplechoice.getQuestions);
+
+    //Student Routes
+    app.route('/api/esm/students')
+        .get(students.listStudents)
+        .post(students.registerStudent);
+
+    app.route('/api/esm/students/:studentId')
+        .get(students.readStudent)
+
 };

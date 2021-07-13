@@ -1,6 +1,6 @@
 'use strict';
 
-let mongoose = require('mongoose'), StudentRegistration = mongoose.model('StudentRegistrations');
+let mongoose = require('mongoose'), StudentEnrolment = mongoose.model('StudentEnrolments');
 var importStudents = require('../middleware/batchUploads');
 
 // Upload Enrolment Batch
@@ -11,20 +11,20 @@ exports.batchStudentsSubject = function (req, res) {
     });
 }
 
-exports.listStudentRegistrationsPerSubject = function (req, res) {
-    StudentRegistration.find({ subjectCode: req.params.subjectCode }, function (err, studentRegistration) {
+exports.listStudentEnrolmentsPerSubject = function (req, res) {
+    StudentEnrolment.find({ subjectCode: req.params.subjectCode }, function (err, studentEnrolment) {
         if (err)
             res.send(err);
-        res.json(studentRegistration);
+        res.json(studentEnrolment);
     });
 };
 
-exports.listRegistrationsPerStudent = function (req, res) {
+exports.listEnrolmentsPerStudent = function (req, res) {
     console.log(req.params.studentId)
-    StudentRegistration.find({ studentId: req.params.studentId }, function (err, studentRegistration) {
+    StudentEnrolment.find({ studentId: req.params.studentId }, function (err, studentEnrolment) {
         if (err)
             res.send(err);
-        res.json(studentRegistration);
+        res.json(studentEnrolment);
     });
 };
 
@@ -35,9 +35,9 @@ exports.enrolForSubject = function (req, res) {
         studentSubjectCode: req.body.studentId + req.body.subjectCode
     };
 
-    let new_studentRegistration = new StudentRegistration(studentBody);
+    let new_studentEnrolment = new StudentEnrolment(studentBody);
 
-    new_studentRegistration.save(function (err, studentRegistration) {
+    new_studentEnrolment.save(function (err, studentEnrolment) {
 
         if (err)
             if (err.name === 'MongoError' && err.code === 11000) {
@@ -47,19 +47,19 @@ exports.enrolForSubject = function (req, res) {
                 res.send(err);
             }
 
-        res.json(studentRegistration);
+        res.json(studentEnrolment);
     });
 
 
 };
 
-exports.deleteStudentRegistration = function (req, res) {
-    StudentRegistration.remove({
-        _id: req.params.studentRegistrationId
-    }, function (err, studentRegistration) {
+exports.deleteStudentEnrolment = function (req, res) {
+    StudentEnrolment.remove({
+        _id: req.params.studentEnrolmentId
+    }, function (err, studentEnrolment) {
         if (err)
             res.send(err);
-        res.json({ message: 'Student Registration successfully deleted' });
+        res.json({ message: 'Student Enrolment successfully deleted' });
     });
 };
 

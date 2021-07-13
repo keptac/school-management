@@ -1,6 +1,6 @@
 'use strict';
 
-let mongoose = require('mongoose'), StudentRegistration = mongoose.model('StudentRegistrations');
+let mongoose = require('mongoose'), StudentEnrolment = mongoose.model('StudentEnrolments');
 
 const fs = require('fs');
 const excelToJson = require('convert-excel-to-json');
@@ -23,9 +23,9 @@ module.exports = function importStudents(fileName) {
         }]
     });
 
-    let new_studentRegistration = new StudentRegistration();
+    let new_studentEnrolment = new StudentEnrolment();
 
-    new_studentRegistration.collection.insertMany(excelData.Students)
+    new_studentEnrolment.collection.insertMany(excelData.Students)
         .then((res) => {
             console.log("Number of documents inserted: " + res.insertedCount);
         })

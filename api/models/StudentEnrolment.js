@@ -2,11 +2,12 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let StudentRegistrationSchema = new Schema({
+let StudentEnrolmentSchema = new Schema({
 
     studentId: {
         type: String,
-        required: 'Kindly enter the name of the task'
+       
+        required: 'Kindly enter the name of the Student ID'
     },
 
     subjectCode: {
@@ -34,4 +35,4 @@ let StudentRegistrationSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('StudentRegistrations', StudentRegistrationSchema);
+module.exports = mongoose.model('StudentEnrolments', StudentEnrolmentSchema);
