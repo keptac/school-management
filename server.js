@@ -11,21 +11,7 @@ const studentRegistration = require('./api/models/StudentRegistration');
 const subject = require('./api/models/SubjectModel'); 
 const submissions = require('./api/models/SubmissionsModel');
 const multer = require('multer');
-
-var importStudents = require('./api/middleware/batchUploads');
-
 global.__basedir = __dirname;
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, __basedir + '/uploads/')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + "-" + Date.now() + "-" + file.originalname)
-    }
-});
-
-const upload = multer({ storage: storage });
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
@@ -38,17 +24,12 @@ mongoose.connect('mongodb://localhost/ElearnSchoolManagement',{
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('./public'));
+app.use('/uploads', express.static('uploads'));
 
 //register the route
 var routes = require('./api/routes/esmRoutes');
 routes(app); 
-
-app.post('/api/esm/batch-student-registations', upload.single("bulkregister"), (req, res) => {
-    importStudents(__basedir + '/uploads/' + req.file.filename);
-    res.json({
-        'msg': 'File uploaded/import successfully!', file:req.file
-    })
-});
 
 app.use(function(req, res) {
     res.status(404).send({url: req.originalUrl + ' not found'})

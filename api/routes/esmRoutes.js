@@ -1,5 +1,6 @@
 'use strict';
 
+
 module.exports = function (app) {
 
     let announcements = require('../controllers/announcementsController');
@@ -8,6 +9,10 @@ module.exports = function (app) {
     var subjects = require('../controllers/subjectController');
     var submissions = require('../controllers/submissionsController');
     var studentSubjectRegistrations = require('../controllers/studentSubjectRegistrationController');
+    var upload = require('../middleware/upload');
+
+    //Batches|Bulk uploads
+    app.post('/api/esm/batch-student-registations', upload, studentSubjectRegistrations.batchStudentsSubject);
 
     //Announcement Routes
     app.route('/api/esm/announcements')
