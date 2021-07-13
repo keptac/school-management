@@ -13,6 +13,7 @@ const studentEnrolment = require('./api/models/StudentEnrolment');
 const subject = require('./api/models/SubjectModel'); 
 const submissions = require('./api/models/SubmissionsModel');
 const multiplchoice = require('./api/models/MultipleChoiceModel');
+const onlineApplicaiton = require('./api/models/OnlineApplicationModel');
 const multer = require('multer');
 global.__basedir = __dirname;
 

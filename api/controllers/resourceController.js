@@ -11,12 +11,23 @@ exports.listResourcesBySubjectCode = function (req, res) {
 };
 
 exports.uploadResource = function (req, res) {
-    let new_resource = new Resource(req.body);
-    new_resource.save(function (err, resource) {
-        if (err)
-            res.send(err);
-        res.json(resource);
-    });
+var fileFolder = __dirname + '/../../uploads/'+req.body.subjectCode+'/';
+    try{
+        req.files.forEach(element => {
+            req.body.resourcePath = fileFolder + element.filename;
+            let new_resource = new Resource(req.body);
+            new_resource.save(function (err, resource) {
+                if (err)
+                    res.send(err);
+                console.log('\n>>>>>>>>>> Added resource >>>>>>>>>\n'+resource);
+            });
+        });
+        return res.status(201).json({success:true, message:"Resources added"})
+    }catch (error){
+        console.log(error);
+        return res.status(500).json({ "error": "Failed to upload file", reason: error })
+    }
+
 };
 
 exports.readResource = function (req, res) {

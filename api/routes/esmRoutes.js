@@ -12,6 +12,8 @@ module.exports = function (app) {
     var multiplechoice = require('../controllers/multipleChoiceController');
     var students = require('../controllers/studentController');
     var upload = require('../middleware/upload');
+    var uploadFiles = require('../middleware/uploadResources');
+    
 
     //Batches|Bulk uploads
     app.post('/api/esm/batch-student-enrolment', upload, studentSubjectEnrolments.batchStudentsSubject);
@@ -40,8 +42,7 @@ module.exports = function (app) {
         .delete(assignments.deleteAssignment);
 
     //Learning Resources
-    app.route('/api/esm/teacher/resources')
-        .post(resources.uploadResource);
+    app.post('/api/esm/teacher/resources', uploadFiles, resources.uploadResource);
 
     app.route('/api/esm/teacher/resources/subject/:subjectCode')
         .get(resources.listResourcesBySubjectCode);
