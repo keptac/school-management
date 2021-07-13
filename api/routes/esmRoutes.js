@@ -9,6 +9,7 @@ module.exports = function (app) {
     var subjects = require('../controllers/subjectController');
     var submissions = require('../controllers/submissionsController');
     var studentSubjectRegistrations = require('../controllers/studentSubjectRegistrationController');
+    var multiplechoice = require('../controllers/multipleChoiceController');
     var upload = require('../middleware/upload');
 
     //Batches|Bulk uploads
@@ -77,8 +78,6 @@ module.exports = function (app) {
 
 
     //Submissions Routes
-    app.route('/api/esm/submissions')
-        .post(submissions.submitAssignment);
 
     app.route('/api/esm/submissions/subject/:subjectCode')
         .get(submissions.listSubmissionsByAssignmentId);
@@ -91,4 +90,11 @@ module.exports = function (app) {
         .get(submissions.readSubmission)
         .put(submissions.gradeSubmission)
         .delete(submissions.deleteSubmission);
+
+    //Multiple Choice Questions
+    app.route('/api/esm/multiplechoice')
+        .post(multiplechoice.createTest);
+
+    app.route('/api/esm/multiplechoice/:subjectCode/:testTitle')
+        .get(multiplechoice.getQuestions);
 };

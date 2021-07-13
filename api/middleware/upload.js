@@ -11,4 +11,4 @@ const storage = multer.diskStorage({
 
 let upload = multer({ storage: storage });
 
-module.exports =  upload.single('bulkregister');
+module.exports = upload.single('batchenrol');

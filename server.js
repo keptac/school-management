@@ -1,6 +1,8 @@
 const express = require('express');
+require('dotenv').config();
 
-var app = express(), port = process.env.PORT || 3000, mongoose = require('mongoose');
+var app = express(), port = process.env.PORT, mongoose = require('mongoose');
+
 
 //Register Models
 const assignment = require('./api/models/assignmentModel');
@@ -10,12 +12,13 @@ const student = require('./api/models/StudentModel');
 const studentRegistration = require('./api/models/StudentRegistration');
 const subject = require('./api/models/SubjectModel'); 
 const submissions = require('./api/models/SubmissionsModel');
+const multiplchoice = require('./api/models/MultipleChoiceModel');
 const multer = require('multer');
 global.__basedir = __dirname;
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/ElearnSchoolManagement',{
+mongoose.connect(process.env.DATABASE_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

@@ -3,9 +3,9 @@
 let mongoose = require('mongoose'), StudentRegistration = mongoose.model('StudentRegistrations');
 var importStudents = require('../middleware/batchUploads');
 
+// Upload Enrolment Batch
 exports.batchStudentsSubject = function (req, res) {
     importStudents(req.file.filename);
-
     res.json({
         'msg': 'File uploaded/import successfully!', file: req.file
     });
