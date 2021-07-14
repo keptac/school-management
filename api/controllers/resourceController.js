@@ -3,7 +3,7 @@ let mongoose = require('mongoose'), Resource = mongoose.model('Resources');
 
 //Learning Materials
 exports.listResourcesBySubjectCode = function (req, res) {
-    Resource.find({ subjectCode: req.body.subjectCode }, function (err, resource) {
+    Resource.find({ subjectCode: req.params.subjectCode }, function (err, resource) {
         if (err)
             res.send(err);
         res.json(resource);

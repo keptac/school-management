@@ -13,7 +13,7 @@ module.exports = function (app) {
     var students = require('../controllers/studentController');
     var upload = require('../middleware/upload');
     var uploadFiles = require('../middleware/uploadResources');
-    
+
 
     //Batches|Bulk uploads
     app.post('/api/esm/batch-student-enrolment', upload, studentSubjectEnrolments.batchStudentsSubject);
@@ -30,8 +30,7 @@ module.exports = function (app) {
         .delete(announcements.delete_an_announcement);
 
     //Assignments
-    app.route('/api/esm/teacher/assignments')
-        .post(assignments.uploadAssignment);
+    app.post('/api/esm/teacher/assignments', uploadFiles, assignments.uploadAssignment);
 
     app.route('/api/esm/teacher/assignments/subject/:subjectCode')
         .get(assignments.listAssignmentsBySubjectCode);
@@ -93,12 +92,14 @@ module.exports = function (app) {
         .put(submissions.gradeSubmission)
         .delete(submissions.deleteSubmission);
 
+
     //Multiple Choice Questions
     app.route('/api/esm/multiplechoice')
         .post(multiplechoice.createTest);
 
     app.route('/api/esm/multiplechoice/:subjectCode/:testTitle')
         .get(multiplechoice.getQuestions);
+
 
     //Student Routes
     app.route('/api/esm/students')

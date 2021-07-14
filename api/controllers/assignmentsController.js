@@ -11,14 +11,23 @@ exports.listAssignmentsBySubjectCode = function (req, res) {
 };
 
 exports.uploadAssignment = function (req, res) {
-    let new_assignment = new Assignment(req.body);
-    new_assignment.save(function (err, assignment) {
-        if (err)
-            res.send(err);
-        res.json(assignment);
-    });
+    var fileFolder = __dirname + '/../../uploads/'+req.body.subjectCode+'/';
+    try{
+        req.files.forEach(element => {
+            req.body.assignmentPath = fileFolder + element.filename;
+            let new_assignment = new Assignment(req.body);
+            new_assignment.save(function (err, assignment){
+                if (err)
+                    res.send(err);
+                console.log('\n>>>>>>>>>> Added assignment >>>>>>>>>\n'+assignment);
+            });
+        });
+        return res.status(201).json({success:true, message:"Assignment/Homework issued"})
+    }catch (error){
+        console.log(error);
+        return res.status(500).json({ "error": "Failed to upload assignment", reason: error })
+    }
 };
-
 
 exports.readAssignment = function (req, res) {
     Assignment.findById(req.params.assignmentId, function (err, assignment) {
