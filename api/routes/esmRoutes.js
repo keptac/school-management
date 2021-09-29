@@ -14,7 +14,6 @@ module.exports = function (app) {
     var upload = require('../middleware/upload');
     var uploadFiles = require('../middleware/uploadResources');
 
-
     //Batches|Bulk uploads
     app.post('/api/esm/batch-student-enrolment', upload, studentSubjectEnrolments.batchStudentsSubject);
     app.post('/api/esm/batch-student-registation', upload, students.batchStudentsRegister);
@@ -60,7 +59,7 @@ module.exports = function (app) {
 
     app.route('/api/esm/student-enrolment/student/:studentId')
         .get(studentSubjectEnrolments.listEnrolmentsPerStudent);
-
+        
     app.route('/api/esm/student-enrolment/:studentEnrolmentId')
         .delete(studentSubjectEnrolments.deleteStudentEnrolment);
 

@@ -3,7 +3,6 @@ require('dotenv').config();
 
 var app = express(), port = process.env.PORT, mongoose = require('mongoose');
 
-
 //Register Models
 const assignment = require('./api/models/assignmentModel');
 const announcement = require('./api/models/AnnouncementsModel');

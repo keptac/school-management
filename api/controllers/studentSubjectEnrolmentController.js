@@ -15,12 +15,12 @@ exports.listStudentEnrolmentsPerSubject = function (req, res) {
     StudentEnrolment.find({ subjectCode: req.params.subjectCode }, function (err, studentEnrolment) {
         if (err)
             res.send(err);
+        console.log(studentEnrolment);
         res.json(studentEnrolment);
     });
 };
 
 exports.listEnrolmentsPerStudent = function (req, res) {
-    console.log(req.params.studentId)
     StudentEnrolment.find({ studentId: req.params.studentId }, function (err, studentEnrolment) {
         if (err)
             res.send(err);
