@@ -6,7 +6,7 @@
   "scripts": {
     "test": "run-tests",
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node ."
   },
   "repository": {
     "type": "git",
@@ -16,7 +16,9 @@
     "school",
     "management",
     "system",
-    "elearning"
+    "elearning",
+    "keptac",
+    "techvivid"
   ],
   "author": "kelvin chelenje",
   "license": "ISC",
