@@ -18,7 +18,7 @@ const reportSubmissions = require('./src/models/ReportSubmissionsModel');
 const staff = require('./src/models/StaffModel');
 const studentMarks = require('./src/models/StudentMarksModel'); 
 const teacherClasses = require('./src/models/TeacherClassModel');
-const payments = require('./src/models/Paymentmodel');
+const payments = require('./src/models/PaymentModel');
 
 const multer = require('multer');
 global.__basedir = __dirname;
