@@ -43,7 +43,7 @@ exports.registerStaff = async function (req, res) {
             });
         }
     } catch (error) {
-        console("Snap Error in registration "+ error);
+        console.log("Snap Error in registration "+ error);
         res.status(400).send({success:false,message:"Snap, something happened. Please contact the Admin or your helpdesk.", error:error});
     }
 
