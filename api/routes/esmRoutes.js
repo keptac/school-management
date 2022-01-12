@@ -83,14 +83,14 @@ module.exports = function (app) {
         .delete(subjects.deleteSubject);
     
     //Teacher Routes
-    app.route('/api/westminster/teacherClasses')
+    app.route('/api/esm/teacherClasses')
         .get( teacherClasses.listTeacherClasses)
         .post( teacherClasses.createTeacherClass);
     
-    app.route('/api/westminster/teacherClasses/teacher/:teacherId')
+    app.route('/api/esm/teacherClasses/teacher/:teacherId')
         .get( teacherClasses.listTeacherClassPerTeacher);
     
-    app.route('/api/westminster/teacherClasses/:classId')
+    app.route('/api/esm/teacherClasses/:classId')
         .get( teacherClasses.readTeacherClass)
         .delete( teacherClasses.deleteTeacherClass);
 
@@ -122,20 +122,20 @@ module.exports = function (app) {
     app.route('/api/esm/students/:studentId')
         .get(students.readStudent)
         
-    app.route('/api/westminster/students/class/:classId')
+    app.route('/api/esm/students/class/:classId')
         .get( students.listStudentsPerClass)    
     
     //Student Marks Routes
-    app.route('/api/westminster/studentMarks')
+    app.route('/api/esm/studentMarks')
         .post( studentMarks.submitMarks);
 
-    app.route('/api/westminster/studentMarks/class/:classId')
+    app.route('/api/esm/studentMarks/class/:classId')
         .get( studentMarks.listStudentMarksByClassId);
 
-    app.route('/api/westminster/studentMarks/student/:studentId')
+    app.route('/api/esm/studentMarks/student/:studentId')
         .get( studentMarks.studentMarksForStudent);
 
-    app.route('/api/westminster/studentMarks/:submissionId')
+    app.route('/api/esm/studentMarks/:submissionId')
         .delete( studentMarks.deleteStudentMarks);
 
     //Progress Report Generation
@@ -143,43 +143,43 @@ module.exports = function (app) {
     .get( reportGeneration.generateReports);
 
     // Classes Routes
-    app.route('/api/westminster/class')
+    app.route('/api/esm/class')
         .get( classes.listClasses)
         .post( classes.addClass);
 
-    app.route('/api/westminster/class/:classId')
+    app.route('/api/esm/class/:classId')
         .delete( classes.deleteClass)
 
     // Subjects Routes
-    app.route('/api/westminster/subjects')
+    app.route('/api/esm/subjects')
         .get( subjects.listSubjects)
         .post( subjects.createSubject);
 
-    app.route('/api/westminster/students/:subjectCode')
+    app.route('/api/esm/students/:subjectCode')
         .get( subjects.deleteSubject)
 
     // Report Submission Routes
-    app.route('/api/westminster/reportsubmissions')
+    app.route('/api/esm/reportsubmissions')
         .get( reportSubmissions.listAllReportSubmissions)
         .post( reportSubmissions.addReportSubmission);
     
-    app.route('/api/westminster/reportsubmissions/teacherSubmissionStatus/:teacherId/:subjectCode')
+    app.route('/api/esm/reportsubmissions/teacherSubmissionStatus/:teacherId/:subjectCode')
         .get( reportSubmissions.checkSubmissionStatus)
 
-    app.route('/api/westminster/students/:classId')
+    app.route('/api/esm/students/:classId')
         .get( reportSubmissions.deleteReportSubmission)
 
     // Staff Routes
-    app.route('/api/westminster/staff')
+    app.route('/api/esm/staff')
         .get( staff.listStaffs)
         .post(staff.registerStaff);
 
-    app.route('/api/westminster/staffType/:userType')
+    app.route('/api/esm/staffType/:userType')
         .get( staff.listUserByType)
     
-    app.route('/api/westminster/staff/:staffId')
+    app.route('/api/esm/staff/:staffId')
         .get( staff.readStaff)
 
-    app.route('/api/westminster/staff/authenticate')
+    app.route('/api/esm/staff/authenticate')
         .post(staff.staffAuthentication);
 };
