@@ -19,6 +19,7 @@ exports.listSubjectsPerTeacher = function(req, res) {
 };
 
 exports.createSubject = function (req, res) {
+    console.log('Subject Creation :::: '+req.body.subjectName+' '+req.body.subjectCode);
     let newSubject = new Subject(req.body);
     newSubject.save(function (err, subjects) {
         if (err)

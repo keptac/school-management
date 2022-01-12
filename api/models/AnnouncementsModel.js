@@ -13,7 +13,7 @@ let AnnouncementSchema = new Schema({
     },
     imageUrl: {
         type: String,
-        default: '/static/images/resources/westminster.png',
+        default: '/static/images/resources/mtgs.png',
     },
     updatedAt: {
         type: Date,

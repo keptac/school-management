@@ -9,6 +9,9 @@ module.exports = function (app) {
     var studentSubjectEnrolments = require('../controllers/studentSubjectEnrolmentController');
     var multiplechoice = require('../controllers/multipleChoiceController');
     var students = require('../controllers/studentController');
+
+    var payments = require('../controllers/allPaymentsController');
+
     var upload = require('../middleware/upload');
     var uploadFiles = require('../middleware/uploadResources');
     var teacherClasses = require('../controllers/teacherClassesController');
@@ -182,4 +185,15 @@ module.exports = function (app) {
 
     app.route('/api/esm/staff/authenticate')
         .post(staff.staffAuthentication);
+
+    //Payments
+    app.route('/api/esm/payments')
+        .get(payments.listPayments)
+        .post(payments.addNewPayment);
+
+    app.route('/api/esm/payments/student/:studentId')
+        .get(payments.getPaymentsByStudent)
+        
+    app.route('/api/esm/payments/:paymentReference')
+        .get( payments.getpaymentByRefernce)   
 };

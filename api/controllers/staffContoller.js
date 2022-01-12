@@ -21,7 +21,7 @@ exports.listUserByType = function (req, res) {
 };
 
 exports.registerStaff = async function (req, res) {
-
+    console.log('Staff Registration:::: '+req.body.email);
     try {
         const {  email, password } = req.body;
         const oldUser = await Staff.findOne({email});
@@ -57,9 +57,8 @@ exports.readStaff = function (req, res) {
     });
 };
 
-
 exports.staffAuthentication = async function (req, res) {
-
+    console.log('Authentication:::: '+req.body.email);
     try {
         const { email, password } = req.body;
         const user = await Staff.findOne({ email });

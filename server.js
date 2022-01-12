@@ -18,6 +18,7 @@ const reportSubmissions = require('./api/models/ReportSubmissionsModel');
 const staff = require('./api/models/StaffModel');
 const studentMarks = require('./api/models/StudentMarksModel'); 
 const teacherClasses = require('./api/models/TeacherClassModel');
+const payments = require('./api/models/Paymentmodel');
 
 const multer = require('multer');
 global.__basedir = __dirname;
