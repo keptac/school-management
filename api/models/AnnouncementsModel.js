@@ -3,11 +3,19 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let AnnouncementSchema = new Schema({
-    message: {
+    noticeTitle: {
         type: String,
         required: 'Kindly enter the announcement'
     },
-    date_created: {
+    noticeBody: {
+        type: String,
+        required: 'Kindly enter the announcement'
+    },
+    imageUrl: {
+        type: String,
+        default: '/static/images/resources/westminster.png',
+    },
+    updatedAt: {
         type: Date,
         default: Date.now
     },

@@ -32,6 +32,11 @@ let StudentSchema = new Schema({
         required: 'Kindly enter the address of the student'
     },
 
+    emailAddress: {
+        type: String,
+        required: 'Kindly enter the email address of the student'
+    },
+
     guardianName: {
         type: String,
         required: 'Kindly enter the Guardian Name'
@@ -44,7 +49,7 @@ let StudentSchema = new Schema({
         type: Number,
         required: 'Kindly enter the phonenumber'
     },
-    dateOfBirth: {
+    dob: {
         type: Date
     },
     gender: {
@@ -52,6 +57,10 @@ let StudentSchema = new Schema({
             type: String,
             enum: ['MALE', 'FEMALE']
         }],
+    },
+    classId: {
+        type: String,
+        required: 'Kindly select class of the student'
     },
     dateJoined: {
         type: Date,

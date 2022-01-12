@@ -2,8 +2,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var SubjectSchema = new Schema({
-    subjectName: {
+var TeacherClassSchema = new Schema({
+    className: {
+        type: String,
+        required: 'Kindly enter the name of the subject'
+    },
+    classId: {
         type: String,
         required: 'Kindly enter the name of the subject'
     },
@@ -12,8 +16,12 @@ var SubjectSchema = new Schema({
         type: String,
     },
 
-    grade: {
-        type: Number,
+    subjectName: {
+        type: String,
+    },
+
+    level: {
+        type: String,
         required: 'Kindly enter the grade'
     },
 
@@ -21,24 +29,15 @@ var SubjectSchema = new Schema({
         type: String,
         required: 'Kindly enter the Teacher for the subject'
     },
-    level: {
+    teacherName: {
         type: String,
-        required: 'Kindly enter the level'
+        required: 'Kindly enter the Teacher for the subject'
     },
 
-    created_At: {
+    Created_date: {
         type: Date,
         default: Date.now
     },
-
-    status: {
-        type: [{
-            type: String,
-            enum: ['ACTIVE', 'DISABLED']
-        }],
-        default: ['ACTIVE']
-    }
-
 });
 
-module.exports = mongoose.model('Subjects', SubjectSchema);
+module.exports = mongoose.model('TeacherClass', TeacherClassSchema);

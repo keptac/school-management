@@ -30,7 +30,10 @@
     "express": "^4.17.1",
     "mongoose": "^5.12.14",
     "multer": "^1.4.2",
-    "read-excel-file": "^5.2.7"
+    "read-excel-file": "^5.2.7",
+    "bcryptjs": "^2.4.3",
+    "downloads-folder": "^3.0.1",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

@@ -18,12 +18,12 @@ exports.listSubjectsPerTeacher = function(req, res) {
     });
 };
 
-exports.createSubject = function(req, res) {
-    let new_subject = new Subject(req.body);
-    new_subject.save(function(err, subject) {
+exports.createSubject = function (req, res) {
+    let newSubject = new Subject(req.body);
+    newSubject.save(function (err, subjects) {
         if (err)
-            res.send(err);
-        res.json(subject);
+            res.send({success:false, message:"An error occured please contact admin", error:err});
+        res.json({success:true, message:"Subject added successfully."});
     });
 };
 
@@ -50,5 +50,13 @@ exports.deleteSubject = function(req, res) {
         if (err)
             res.send(err);
         res.json({ message: 'Subject successfully deleted' });
+    });
+};
+
+exports.listAllSubjectsByLevel = function (req, res) {
+    Subject.find({ level: req.params.level }, function (err, assignment) {
+        if (err)
+            res.send(err);
+        res.json(assignment);
     });
 };
