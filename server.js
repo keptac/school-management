@@ -6,7 +6,7 @@ var app = express(), port = process.env.PORT, mongoose = require('mongoose');
 //Register Models
 const announcement = require('./src/models/AnnouncementsModel');
 const resources = require('./src/models/ResourcesModel'); 
-const assignment = require('./src/models/assignmentModel');
+const assignment = require('./src/models/AssignmentModel');
 const student = require('./src/models/StudentModel');
 const studentEnrolment = require('./src/models/StudentEnrolment');
 const subject = require('./src/models/SubjectModel'); 
