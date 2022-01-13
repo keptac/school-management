@@ -76,6 +76,7 @@ exports.studentAuthentication = async function (req, res) {
                 name: user.firstName + ' ' + user.surname,
                 userType: user.userType,
                 studentId: user.studentId,
+                classId: user.classId,
                 token: token
             }
             res.status(201).json({success:true, message:'Authentication successful', user:userBody})
