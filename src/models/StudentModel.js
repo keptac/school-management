@@ -3,12 +3,6 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let StudentSchema = new Schema({
-    studentId:{
-        type: String,
-        required: 'Kindly provide the student ID',
-        unique: true,
-        dropDups:true
-    },
 
     name: {
         type: String,
@@ -18,6 +12,12 @@ let StudentSchema = new Schema({
     surname: {
         type: String,
         required: 'Kindly enter the surname of the student'
+    },
+    studentId:{
+        type: String,
+        required: 'Kindly provide the student ID',
+        unique: true,
+        dropDups:true
     },
 
     idNumber: {
@@ -29,7 +29,8 @@ let StudentSchema = new Schema({
 
     address: {
         type: String,
-        required: 'Kindly enter the address of the student'
+        default:""
+        //required: 'Kindly enter the address of the student'
     },
 
     emailAddress: {
@@ -39,11 +40,13 @@ let StudentSchema = new Schema({
 
     guardianName: {
         type: String,
-        required: 'Kindly enter the Guardian Name'
+        default:""
+        //required: 'Kindly enter the Guardian Name'
     },
     relationshipToGuardian: {
         type: String,
-        required: 'Kindly enter the relationship of the student to the guardian'
+        default:""
+        //required: 'Kindly enter the relationship of the student to the guardian'
     },
     phoneNumber: {
         type: Number,
