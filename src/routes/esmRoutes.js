@@ -66,7 +66,7 @@ module.exports = function (app) {
     app.route('/api/esm/student-enrolment/subject/:subjectCode')
         .get(studentSubjectEnrolments.listStudentEnrolmentsPerSubject);
 
-    app.route('/api/esm/student-enrolment/student/:studentId')
+    app.route('/api/esm/student-enrolment/student/:classId')
         .get(studentSubjectEnrolments.listEnrolmentsPerStudent);
         
     app.route('/api/esm/student-enrolment/:studentEnrolmentId')
@@ -118,6 +118,12 @@ module.exports = function (app) {
         .get(multiplechoice.getQuestions);
 
     //Student Routes
+    app.route('/api/esm/student/authenticate')
+        .post(students.studentAuthentication);
+
+    app.route('/api/esm/student/authenticateReg')
+        .post(students.registerStudentAuth);
+
     app.route('/api/esm/students')
         .get(students.listStudents)
         .post(students.registerStudent);
