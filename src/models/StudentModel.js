@@ -32,7 +32,6 @@ let StudentSchema = new Schema({
         default:""
         //required: 'Kindly enter the address of the student'
     },
-
     emailAddress: {
         type: String,
         required: 'Kindly enter the email address of the student'
@@ -58,7 +57,7 @@ let StudentSchema = new Schema({
     gender: {
         type: [{
             type: String,
-            enum: ['MALE', 'FEMALE']
+            enum: ['MALE', 'FEMALE','']
         }],
     },
     classId: {
