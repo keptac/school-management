@@ -55,6 +55,7 @@ exports.listStudentsPerClass = function (req, res) {
     });
 };
 
+
 exports.studentAuthentication = async function (req, res) {
     console.log('Authentication:::: '+req.body.email);
     try {
