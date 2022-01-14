@@ -32,6 +32,11 @@ var AssignmentSchema = new Schema({
         type: String,
     },
 
+    assignmentId: {
+        type: String,
+        required: 'Assignment Id required'
+    },
+
     uploadedOn: {
         type: Date,
         default: Date.now
