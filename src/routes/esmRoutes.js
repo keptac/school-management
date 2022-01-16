@@ -32,6 +32,9 @@ module.exports = function (app) {
         .get(announcements.list_all_announcements)
         .post(announcements.create_an_announcement);
 
+    app.route('/api/esm/announcements/:target')
+        .get(announcements.listAnnouncementsByTarget)
+
     app.route('/api/esm/accouncements/:announcementId')
         .get(announcements.read_an_announcement)
         .put(announcements.update_an_announcement)

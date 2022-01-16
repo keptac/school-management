@@ -11,6 +11,10 @@ let AnnouncementSchema = new Schema({
         type: String,
         required: 'Kindly enter the announcement'
     },
+    target: {
+        type: String,
+        default: 'ALL',
+    },
     imageUrl: {
         type: String,
         default: '/static/images/resources/mtgs.png',
