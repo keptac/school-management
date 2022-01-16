@@ -38,7 +38,7 @@ exports.readAssignment = function (req, res) {
 };
 
 exports.updateAssignment = function (req, res) {
-    Assignment.findOneAndUpdate({ _id: req.params.assignmentId }, req.body, { new: true }, function (err, assignment) {
+    Assignment.findOneAndUpdate({ assignmentId: req.params.assignmentId }, req.body, { new: true }, function (err, assignment) {
         if (err)
             res.send(err);
         res.json(assignment);
@@ -52,5 +52,17 @@ exports.deleteAssignment = function (req, res) {
         if (err)
             res.send(err);
         res.json({ message: 'Assignment successfully deleted' });
+    });
+};
+
+exports.checkAssignmentStatus = function(req, res) {
+    Assignment.find({teacherId: req.params.teacherId, assignmentId: req.params.assignmentId, status:'CLOSED'}, function(err, marks) {
+        if (err)
+            res.send(err);
+        if(marks.length>0){
+            res.json({submitted:true})
+        }else{
+            res.json({submitted:false})
+        }
     });
 };

@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'), Submission = mongoose.model('Submissions');
 
 exports.listSubmissionsByAssignmentId = function(req, res) {
-    Submission.find({subjectCode: req.params.subjectCode}, function(err, submission) {
+    Submission.find({assignmentId: req.params.assignmentId}, function(err, submission) {
         if (err)
             res.send(err);
         res.json(submission);

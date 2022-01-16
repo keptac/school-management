@@ -3,9 +3,18 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var AssignmentSchema = new Schema({
+    assignmentId: {
+        type: String,
+        required: 'Assignment Id required'
+    },
+
     assignmentTitle: {
         type: String,
         required: 'Kindly enter the Title of the assignment'
+    },
+
+    assignmentDescription: {
+        type: String,
     },
 
     subjectCode: {
@@ -31,16 +40,14 @@ var AssignmentSchema = new Schema({
     assignmentPath: {
         type: String,
     },
-
-    assignmentId: {
+    status: {
         type: String,
-        required: 'Assignment Id required'
+        default: 'OPEN'
     },
-
     uploadedOn: {
         type: Date,
         default: Date.now
-    },
+    }
 });
 
 module.exports = mongoose.model('Assignments', AssignmentSchema);

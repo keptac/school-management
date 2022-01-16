@@ -39,6 +39,7 @@ module.exports = function (app) {
 
     //Assignments
     app.post('/api/esm/teacher/assignments', uploadFiles, assignments.uploadAssignment);
+    
 
     app.route('/api/esm/teacher/assignments/subject/:subjectCode')
         .get(assignments.listAssignmentsBySubjectCode);
@@ -47,6 +48,10 @@ module.exports = function (app) {
         .get(assignments.readAssignment)
         .put(assignments.updateAssignment)
         .delete(assignments.deleteAssignment);
+
+    app.route('/api/esm/teacher/assignmentStatus/:teacherId/:assignmendId')
+        .get( assignments.checkAssignmentStatus)
+
 
     //Learning Resources
     app.post('/api/esm/teacher/resources', uploadFiles, resources.uploadResource);
@@ -98,7 +103,10 @@ module.exports = function (app) {
         .delete( teacherClasses.deleteTeacherClass);
 
     //Submissions Routes
-    app.route('/api/esm/submissions/subject/:subjectCode')
+    app.route('/api/esm/submissions/subject')
+        .get(submissions.submitAssignment);
+
+    app.route('/api/esm/submissions/:assignmentId')
         .get(submissions.listSubmissionsByAssignmentId);
 
     app.route('/api/esm/submissions/student/:subjectCode/:studentId')
