@@ -14,13 +14,18 @@ exports.listStudents = function (req, res) {
 };
 
 exports.registerStudent = function (req, res) {
-    console.log('Student New Registration :::: '+req.body.idNumber);
-    let new_student = new Student(req.body);
-    new_student.save(function (err, student) {
-        if (err)
-            res.send({success:false, message:"An error occured please contact admin", error:err});
-        res.json({success:true, message:"Student Register successfully."});
-    });
+    try {
+        console.log('Student New Registration :::: '+req.body.idNumber);
+        console.log(req.body);
+        let new_student = new Student(req.body);
+        new_student.save(function (err, student) {
+            if (err)
+                res.send({success:false, message:"A student with that ID already exists.", error:err});
+            res.json({success:true, message:"Student Register successfully."});
+        });
+    } catch (error) {
+        res.send({success:false, message:"An error occured please contact admin", error:err});
+    }
 };
 
 
