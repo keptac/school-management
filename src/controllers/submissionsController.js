@@ -19,14 +19,26 @@ exports.submissionsForStudent = function(req, res) {
 };
 
 //Students submits the Assignment - student function
-exports.submitAssignment = function(req, res) {
-    var new_submission = new Submission(req.body);
-    new_submission.save(function(err, submission) {
-        if (err)
-            res.send(err);
-        res.json(submission);
-    });
+
+exports.submitAssignment = function (req, res) {
+    var fileFolder = __dirname + '/../../uploads/'+req.body.submissionId+'/';
+    try{
+        req.files.forEach(element => {
+            req.body.submissionPath = fileFolder + element.filename;
+            let new_submission = new Submission(req.body);
+            new_submission.save(function (err, submission){
+                if (err)
+                    res.send(err);
+                console.log('\n>>>>>>>>>> Added Submission >>>>>>>>>\n'+submission);
+            });
+        });
+        return res.status(201).json({success:true, message:"Assignment/Homework submitted"})
+    }catch (error){
+        console.log(error);
+        return res.status(500).json({ "error": "Failed to upload assignment", reason: error })
+    }
 };
+
 
 // Re-upload assignment - Student function
 exports.update_submission = function(req, res) {

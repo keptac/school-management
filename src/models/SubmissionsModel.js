@@ -4,14 +4,31 @@ var Schema = mongoose.Schema;
 
 var SubmissionSchema = new Schema({
 
+    submissionId: {
+        type: String,
+    },
+
+    subjectName: {
+        type: String,
+    },
+
     subjectCode: {
         type: String,
         required: 'Kindly enter the class code'
     },
 
+    studentName: {
+        type: String,
+        required: 'Kindly enter the student Name'
+    },
+
     studentId: {
         type: String,
-        required: 'Kindly enter the class code'
+        required: 'Kindly enter the student Id'
+    },
+
+    submissionPath: {
+        type: String,
     },
 
     assignmentId: {
@@ -24,9 +41,13 @@ var SubmissionSchema = new Schema({
         default: false
     },
 
-    grade: {
+    mark: {
         type: Number,
         required: 'Kindly enter the grade'
+    },
+    grade: {
+        type: String,
+        required: 'Kindly provide the grade for the mark'
     },
 
     submissionDate: {

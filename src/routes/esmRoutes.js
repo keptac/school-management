@@ -106,8 +106,7 @@ module.exports = function (app) {
         .delete( teacherClasses.deleteTeacherClass);
 
     //Submissions Routes
-    app.route('/api/esm/submissions/subject')
-        .get(submissions.submitAssignment);
+    app.post('/api/esm/submissions/subject', uploadFiles, submissions.submitAssignment);
 
     app.route('/api/esm/submissions/:assignmentId')
         .get(submissions.listSubmissionsByAssignmentId);
@@ -160,7 +159,10 @@ module.exports = function (app) {
 
     //Progress Report Generation
     app.route('/api/esm/studentMarks/reportgeneration')
-    .get( reportGeneration.generateReports);
+        .get( reportGeneration.generateReports);
+    
+    app.route('/api/esm/studentMarks/reportgeneration:studentId')
+        .get( reportGeneration.generateSingleChildReport);
 
     // Classes Routes
     app.route('/api/esm/class')
