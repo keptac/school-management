@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var SubmissionSchema = new Schema({
-
     submissionId: {
         type: String,
     },
@@ -43,7 +42,7 @@ var SubmissionSchema = new Schema({
 
     mark: {
         type: Number,
-        required: 'Kindly enter the grade'
+        required: 'Kindly enter the mark'
     },
     grade: {
         type: String,
@@ -51,7 +50,8 @@ var SubmissionSchema = new Schema({
     },
 
     submissionDate: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
 });
 
