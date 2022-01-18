@@ -9,6 +9,7 @@ module.exports = function (app) {
     var studentSubjectEnrolments = require('../controllers/studentSubjectEnrolmentController');
     var multiplechoice = require('../controllers/multipleChoiceController');
     var students = require('../controllers/studentController');
+    var meetings = require('../controllers/meetingController');
 
     var payments = require('../controllers/allPaymentsController');
 
@@ -215,4 +216,14 @@ module.exports = function (app) {
         
     app.route('/api/esm/payments/:paymentReference')
         .get( payments.getpaymentByRefernce)   
+
+      //Meetings
+    app.route('/api/esm/meetings')
+        .post(meetings.createMeeting);
+
+    app.route('/api/esm/meetings/teacher/:teacherId')
+        .get(meetings.listMeetingsPerTeacher);
+    
+    app.route('/api/esm/meetings/class/:classId')
+        .get(meetings.listMeetingsByClass);
 };

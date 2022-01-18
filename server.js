@@ -20,6 +20,7 @@ const studentMarks = require('./src/models/StudentMarksModel');
 const teacherClasses = require('./src/models/TeacherClassModel');
 const payments = require('./src/models/PaymentModel');
 const studentAuth  = require('./src/models/StudentAuthModel');
+const meetings  = require('./src/models/MeetingsModel');
 
 const multer = require('multer');
 global.__basedir = __dirname;
