@@ -37,6 +37,10 @@ let StaffSchema = new Schema({
         type: String,
         required: 'Kindly enter password'
     },
+    station: {
+        type: String,
+    },
+    
     userType: {
         type: String,
         required: 'Kindly enter the user Type'

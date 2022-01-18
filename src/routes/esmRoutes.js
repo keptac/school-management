@@ -198,7 +198,7 @@ module.exports = function (app) {
         .post(staff.registerStaff);
 
     app.route('/api/esm/staffType/:userType')
-        .get( staff.listUserByType)
+        .get( staff.listStaffs)
     
     app.route('/api/esm/staff/:staffId')
         .get( staff.readStaff)
