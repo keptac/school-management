@@ -10,24 +10,28 @@ const QuestionSchema = new Schema({
         type: String,
         required: 'Kindly enter the subject'
     },
-    question: {
-        type: String,
-        required: 'Kindly enter the question'
-    },
-    choice: {
-        type: String
-    }, 
-    alternatives: [
+    questionsList:[
         {
-            text: {
+            question: {
                 type: String,
-                required: true
+                required: 'Kindly enter the question'
             },
-            isCorrect: {
-                type: Boolean,
-                required: true,
-                default: false
-            }
+            choice: {
+                type: String
+            }, 
+            alternatives: [
+                {
+                    text: {
+                        type: String,
+                        required: true
+                    },
+                    isCorrect: {
+                        type: Boolean,
+                        required: true,
+                        default: false
+                    }
+                }
+            ]
         }
     ]
 })
