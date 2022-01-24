@@ -19,6 +19,14 @@ exports.create_an_announcement = function (req, res) {
     });
 };
 
+exports.listAnnouncementsByTarget = function (req, res) {
+    Announcements.find({ target: req.params.target }, function (err, announcements) {
+        if (err)
+            res.send(err);
+        res.json(announcements);
+    });
+};
+
 exports.read_an_announcement = function (req, res) {
     Announcements.findById(req.params.announcementId, function (err, announcement) {
         if (err)
@@ -28,7 +36,7 @@ exports.read_an_announcement = function (req, res) {
 };
 
 exports.update_an_announcement = function (req, res) {
-    Announcements.findOneAndUpdate({ _id: req.params.announcementId }, req.body, { new: true }, function (err, announcement) {
+    Announcements.findOneAndUpdate({ announcementId: req.params.announcementId }, req.body, { new: true }, function (err, announcement) {
         if (err)
             res.send(err);
         res.json(announcement);

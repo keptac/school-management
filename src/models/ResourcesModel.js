@@ -26,6 +26,11 @@ let ResourceSchema = new Schema({
         required: 'Teacher Id required'
     },
 
+    resourceId: {
+        type: String,
+        required: 'Material Id required'
+    },
+
     uploadedOn: {
         type: Date,
         default: Date.now

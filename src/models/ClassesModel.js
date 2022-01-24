@@ -14,6 +14,11 @@ var ClassSchema = new Schema({
         required: 'Kindly enter the class name'
     },
 
+    station: {
+        type: String,
+        required: 'Kindly enter the station'
+    },
+
     created_At: {
         type: Date,
         default: Date.now

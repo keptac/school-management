@@ -43,7 +43,7 @@ exports.registerStaff = async function (req, res) {
             });
         }
     } catch (error) {
-        console("Snap Error in registration "+ error);
+        console.log("Snap Error in registration "+ error);
         res.status(400).send({success:false,message:"Snap, something happened. Please contact the Admin or your helpdesk.", error:error});
     }
 
@@ -78,6 +78,7 @@ exports.staffAuthentication = async function (req, res) {
                 name: user.firstName + ' ' + user.surname,
                 userType: user.userType,
                 staffId: user.staffId,
+                station: user.station,
                 token: token
             }
             res.status(201).json({success:true, message:'Authentication successful', user:userBody})

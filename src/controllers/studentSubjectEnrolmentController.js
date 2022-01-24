@@ -1,6 +1,6 @@
 'use strict';
 
-let mongoose = require('mongoose'), StudentEnrolment = mongoose.model('StudentEnrolments');
+let mongoose = require('mongoose'), StudentEnrolment = mongoose.model('StudentEnrolments'),TeacherClasses = mongoose.model('TeacherClass');
 var importStudents = require('../middleware/batchUploads');
 
 // Upload Enrolment Batch
@@ -21,7 +21,8 @@ exports.listStudentEnrolmentsPerSubject = function (req, res) {
 };
 
 exports.listEnrolmentsPerStudent = function (req, res) {
-    StudentEnrolment.find({ studentId: req.params.studentId }, function (err, studentEnrolment) {
+    console.log('All Students Subjects :::: '+req.params.classId);
+    TeacherClasses.find({ classId: req.params.classId }, function (err, studentEnrolment) {
         if (err)
             res.send(err);
         res.json(studentEnrolment);

@@ -10,7 +10,7 @@ var SubjectSchema = new Schema({
 
     subjectCode: {
         type: String,
-    },
+    }, 
 
     grade: {
         type: Number,

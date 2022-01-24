@@ -4,21 +4,23 @@ require('dotenv').config();
 var app = express(), port = process.env.PORT, mongoose = require('mongoose');
 
 //Register Models
-const assignment = require('./api/models/assignmentModel');
-const announcement = require('./api/models/AnnouncementsModel');
-const resources = require('./api/models/ResourcesModel'); 
-const student = require('./api/models/StudentModel');
-const studentEnrolment = require('./api/models/StudentEnrolment');
-const subject = require('./api/models/SubjectModel'); 
-const submissions = require('./api/models/SubmissionsModel');
-const multiplchoice = require('./api/models/MultipleChoiceModel');
-const onlineApplicaiton = require('./api/models/OnlineApplicationModel');
-const classes = require('./api/models/ClassesModel');
-const reportSubmissions = require('./api/models/ReportSubmissionsModel'); 
-const staff = require('./api/models/StaffModel');
-const studentMarks = require('./api/models/StudentMarksModel'); 
-const teacherClasses = require('./api/models/TeacherClassModel');
-const payments = require('./api/models/Paymentmodel');
+const announcement = require('./src/models/AnnouncementsModel');
+const resources = require('./src/models/ResourcesModel'); 
+const assignment = require('./src/models/AssignmentModel');
+const student = require('./src/models/StudentModel');
+const studentEnrolment = require('./src/models/StudentEnrolment');
+const subject = require('./src/models/SubjectModel'); 
+const submissions = require('./src/models/SubmissionsModel');
+const multiplchoice = require('./src/models/MultipleChoiceModel');
+const onlineApplicaiton = require('./src/models/OnlineApplicationModel');
+const classes = require('./src/models/ClassesModel');
+const reportSubmissions = require('./src/models/ReportSubmissionsModel'); 
+const staff = require('./src/models/StaffModel');
+const studentMarks = require('./src/models/StudentMarksModel'); 
+const teacherClasses = require('./src/models/TeacherClassModel');
+const payments = require('./src/models/PaymentModel');
+const studentAuth  = require('./src/models/StudentAuthModel');
+const meetings  = require('./src/models/MeetingsModel');
 
 const multer = require('multer');
 global.__basedir = __dirname;
@@ -47,7 +49,7 @@ app.use('/public', express.static('public'));
 app.use(allowCrossDomain);
 
 //register the route
-var routes = require('./api/routes/esmRoutes');
+var routes = require('./src/routes/esmRoutes');
 routes(app); 
 
 app.use(function(req, res) {

@@ -46,3 +46,41 @@ exports.generateReports = async function(_req, res) {
         }
     });
 };
+
+exports.generateSingleChildReport = async function(req, res) {
+    var reportCount = 0;
+    var studentReportsFinal = [];
+    var resultStudents = [];
+    var resultMarks = [];
+    try {
+        StudentMarks.find({studentId: req.params.studentId}, async function(err, marks) {
+            resultMarks= marks;
+            if(marks.length >0){
+                if (err){
+                    res.send(err);
+                }else{
+                    const stud = {
+                        studentName: element.name+' '+element.surname,
+                        results: marks
+                    };
+                    studentReportsFinal.push(stud);
+                }
+            }
+        });
+        console.log(studentReportsFinal); 
+        reportCount = reportCount + 1;
+
+        res.send(
+            {
+                'reportsGenerated':reportCount,
+                'results': studentReportsFinal,
+                'success':true
+            }
+        );
+        
+    } catch (error) {
+        console.log(error);
+        res.send({success:false, message:'Oops, an internal error occured. We are fixing it'});
+    }
+
+};

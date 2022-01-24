@@ -9,6 +9,7 @@ module.exports = function (app) {
     var studentSubjectEnrolments = require('../controllers/studentSubjectEnrolmentController');
     var multiplechoice = require('../controllers/multipleChoiceController');
     var students = require('../controllers/studentController');
+    var meetings = require('../controllers/meetingController');
 
     var payments = require('../controllers/allPaymentsController');
 
@@ -32,6 +33,9 @@ module.exports = function (app) {
         .get(announcements.list_all_announcements)
         .post(announcements.create_an_announcement);
 
+    app.route('/api/esm/announcements/:target')
+        .get(announcements.listAnnouncementsByTarget)
+
     app.route('/api/esm/accouncements/:announcementId')
         .get(announcements.read_an_announcement)
         .put(announcements.update_an_announcement)
@@ -39,6 +43,7 @@ module.exports = function (app) {
 
     //Assignments
     app.post('/api/esm/teacher/assignments', uploadFiles, assignments.uploadAssignment);
+    
 
     app.route('/api/esm/teacher/assignments/subject/:subjectCode')
         .get(assignments.listAssignmentsBySubjectCode);
@@ -47,6 +52,10 @@ module.exports = function (app) {
         .get(assignments.readAssignment)
         .put(assignments.updateAssignment)
         .delete(assignments.deleteAssignment);
+
+    app.route('/api/esm/teacher/assignmentStatus/:teacherId/:assignmendId')
+        .get( assignments.checkAssignmentStatus)
+
 
     //Learning Resources
     app.post('/api/esm/teacher/resources', uploadFiles, resources.uploadResource);
@@ -66,7 +75,7 @@ module.exports = function (app) {
     app.route('/api/esm/student-enrolment/subject/:subjectCode')
         .get(studentSubjectEnrolments.listStudentEnrolmentsPerSubject);
 
-    app.route('/api/esm/student-enrolment/student/:studentId')
+    app.route('/api/esm/student-enrolment/student/:classId')
         .get(studentSubjectEnrolments.listEnrolmentsPerStudent);
         
     app.route('/api/esm/student-enrolment/:studentEnrolmentId')
@@ -98,7 +107,9 @@ module.exports = function (app) {
         .delete( teacherClasses.deleteTeacherClass);
 
     //Submissions Routes
-    app.route('/api/esm/submissions/subject/:subjectCode')
+    app.post('/api/esm/submissions/subject', uploadFiles, submissions.submitAssignment);
+
+    app.route('/api/esm/submissions/:assignmentId')
         .get(submissions.listSubmissionsByAssignmentId);
 
     app.route('/api/esm/submissions/student/:subjectCode/:studentId')
@@ -118,6 +129,12 @@ module.exports = function (app) {
         .get(multiplechoice.getQuestions);
 
     //Student Routes
+    app.route('/api/esm/student/authenticate')
+        .post(students.studentAuthentication);
+
+    app.route('/api/esm/student/authenticateReg')
+        .post(students.registerStudentAuth);
+
     app.route('/api/esm/students')
         .get(students.listStudents)
         .post(students.registerStudent);
@@ -143,7 +160,10 @@ module.exports = function (app) {
 
     //Progress Report Generation
     app.route('/api/esm/studentMarks/reportgeneration')
-    .get( reportGeneration.generateReports);
+        .get( reportGeneration.generateReports);
+    
+    app.route('/api/esm/studentMarks/reportgeneration:studentId')
+        .get( reportGeneration.generateSingleChildReport);
 
     // Classes Routes
     app.route('/api/esm/class')
@@ -178,7 +198,7 @@ module.exports = function (app) {
         .post(staff.registerStaff);
 
     app.route('/api/esm/staffType/:userType')
-        .get( staff.listUserByType)
+        .get( staff.listStaffs)
     
     app.route('/api/esm/staff/:staffId')
         .get( staff.readStaff)
@@ -196,4 +216,14 @@ module.exports = function (app) {
         
     app.route('/api/esm/payments/:paymentReference')
         .get( payments.getpaymentByRefernce)   
+
+      //Meetings
+    app.route('/api/esm/meetings')
+        .post(meetings.createMeeting);
+
+    app.route('/api/esm/meetings/teacher/:teacherId')
+        .get(meetings.listMeetingsPerTeacher);
+    
+    app.route('/api/esm/meetings/class/:classId')
+        .get(meetings.listMeetingsByClass);
 };

@@ -14,6 +14,9 @@ const QuestionSchema = new Schema({
         type: String,
         required: 'Kindly enter the question'
     },
+    choice: {
+        type: String
+    }, 
     alternatives: [
         {
             text: {

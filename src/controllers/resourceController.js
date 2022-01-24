@@ -3,6 +3,7 @@ let mongoose = require('mongoose'), Resource = mongoose.model('Resources');
 
 //Learning Materials
 exports.listResourcesBySubjectCode = function (req, res) {
+    console.log('Requested Resources:::: '+req.params.subjectCode);
     Resource.find({ subjectCode: req.params.subjectCode }, function (err, resource) {
         if (err)
             res.send(err);
@@ -11,21 +12,23 @@ exports.listResourcesBySubjectCode = function (req, res) {
 };
 
 exports.uploadResource = function (req, res) {
+    console.log('\nUploading Learning Resource:::: '+req.body.subjectCode);
 var fileFolder = __dirname + '/../../uploads/'+req.body.subjectCode+'/';
     try{
         req.files.forEach(element => {
             req.body.resourcePath = fileFolder + element.filename;
+            console.log(req.body);
             let new_resource = new Resource(req.body);
             new_resource.save(function (err, resource) {
                 if (err)
-                    res.send(err);
-                console.log('\n>>>>>>>>>> Added resource >>>>>>>>>\n'+resource);
+                    res.send({ "error": "Failed to upload file", reason: err });
+                console.log('\nUploading Learning Resource:::: Completed'+resource);
             });
         });
-        return res.status(201).json({success:true, message:"Resources added"})
+        return res.status(201).json({success:true, message:"Resources added successfully"})
     }catch (error){
         console.log(error);
-        return res.status(500).json({ "error": "Failed to upload file", reason: error })
+        return res.send({ "error": "Failed to upload file", reason: error })
     }
 
 };
