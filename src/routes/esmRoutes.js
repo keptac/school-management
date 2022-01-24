@@ -123,7 +123,11 @@ module.exports = function (app) {
 
     //Multiple Choice Questions
     app.route('/api/esm/multiplechoice')
-        .post(multiplechoice.createTest);
+        .post(multiplechoice.createTest)
+        .get(multiplechoice.getAllTests);
+    
+    app.route('/api/esm/multiplechoice/:subjectCode/')
+        .get(multiplechoice.getQuestionsBySubject);
 
     app.route('/api/esm/multiplechoice/:subjectCode/:testTitle')
         .get(multiplechoice.getQuestions);
