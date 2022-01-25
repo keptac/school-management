@@ -40,6 +40,11 @@ var AssignmentSchema = new Schema({
     assignmentPath: {
         type: String,
     },
+
+    ext: {
+        type: String
+    },
+
     status: {
         type: String,
         default: 'OPEN'

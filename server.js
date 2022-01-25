@@ -32,7 +32,6 @@ var allowCrossDomain = function(req, res, next) {
     next();
 }
 
-// mongoose instance connection url connection
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASE_URL_DEV,{
     useNewUrlParser: true,

@@ -2,6 +2,30 @@
 
 let mongoose = require('mongoose'), Question = mongoose.model('Question');
 
+exports.getAllTests = function (req, res) {
+    try {
+        Question.find({}, function (err, question) {
+            if (err)
+                res.send(err);
+            return res.status(201).json(question)
+        });
+    } catch (error) {
+        return res.status(500).json({ "error": error })
+    }
+};
+
+exports.getQuestionsBySubject = function (req, res) {
+    try {
+        Question.find({ subjectCode: req.params.subjectCode }, function (err, question) {
+            if (err)
+                res.send(err);
+            return res.status(201).json(question)
+        });
+    } catch (error) {
+        return res.status(500).json({ "error": error })
+    }
+};
+
 exports.getQuestions = function (req, res) {
     try {
         Question.find({ subjectCode: req.params.subjectCode, testTitle: req.params.testTitle }, function (err, question) {

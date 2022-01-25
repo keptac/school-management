@@ -30,6 +30,10 @@ var SubmissionSchema = new Schema({
         type: String,
     },
 
+    ext: {
+        type: String
+    },
+
     assignmentId: {
         type: String,
         required: 'Kindly provide the Assignment ID'
