@@ -57,16 +57,12 @@ module.exports = function (app) {
     app.route('/api/esm/teacher/assignmentStatus/:teacherId/:assignmendId')
         .get( assignments.checkAssignmentStatus)
 
-
     //Learning Resources
     app.post('/api/esm/teacher/resources', uploadFiles, resources.uploadResource);
-
-    app.post('/api/esm/teacher/resources/upload-ipfs', uploadFiles, resources.uploadResourceToIpfs);
-
+    app.post('/api/esm/teacher/resources/ipfs', uploadFiles, resources.uploadResourceToIpfs);
 
     app.route('/api/esm/teacher/resources/upload-ipfs2')
         .post(resources.uploadResourceToIpfs);
-
 
     app.route('/api/esm/teacher/resources/subject/:subjectCode')
         .get(resources.listResourcesBySubjectCode);
