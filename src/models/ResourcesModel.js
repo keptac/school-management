@@ -21,6 +21,10 @@ let ResourceSchema = new Schema({
         type: String,
     },
 
+    ext: {
+        type: String,
+    },
+    
     teacherId: {
         type: String,
         required: 'Teacher Id required'

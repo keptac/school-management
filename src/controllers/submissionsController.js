@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'), Submission = mongoose.model('Submissions');
+const path = require('path');
 
 exports.listSubmissionsByAssignmentId = function(req, res) {
     Submission.find({assignmentId: req.params.assignmentId}, function(err, submission) {
@@ -19,6 +20,35 @@ exports.submissionsForStudent = function(req, res) {
 };
 
 //Students submits the Assignment - student function
+exports.submitAssignmentIpfs = function (req, res) {
+    console.log('\nSubmitting Assignment :::: '+req.body.submissionId);
+    var success = false;
+    try{
+        req.files.forEach(element => {
+            req.body.ext = path.extname(element.filename);
+            console.log(req.body);
+            let new_submission = new Submission(req.body);
+            new_submission.save(function (err, submission){
+                console.log('\n>>>>>>>>>> Added Submission >>>>>>>>>\n'+submission);
+                if (err){
+                    res.send(err);
+                }else{
+                    success = true;
+                    console.log('\n>>>>>>>>>> Added Submission >>>>>>>>>\n'+submission);
+                }
+            });
+        });
+        if(success){
+            return res.status(201).json({success:true, message:"Assignment/Homework submitted"})
+        }else{
+            return res.send({ message:"Upload failed", "error": "Failed to upload assignment" })
+        }
+    }catch (error){
+        console.log(error);
+        return res.send({ "error": "Failed to upload assignment", reason: error })
+    }
+};
+
 exports.submitAssignment = function (req, res) {
     console.log('\nSubmitting Assignment :::: '+req.body.submissionId);
     var fileFolder = __dirname + '/../../uploads/'+req.body.submissionId+'/';
@@ -26,6 +56,7 @@ exports.submitAssignment = function (req, res) {
     try{
         req.files.forEach(element => {
             req.body.submissionPath = fileFolder + element.filename;
+            req.body.ext = path.extname(element.filename);
             console.log(req.body);
             let new_submission = new Submission(req.body);
             new_submission.save(function (err, submission){

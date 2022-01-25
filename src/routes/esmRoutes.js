@@ -43,6 +43,7 @@ module.exports = function (app) {
 
     //Assignments
     app.post('/api/esm/teacher/assignments', uploadFiles, assignments.uploadAssignment);
+    app.post('/api/esm/teacher/assignments/ipfs', uploadFiles, assignments.uploadAssignmentIpfs);
     
 
     app.route('/api/esm/teacher/assignments/subject/:subjectCode')
@@ -59,6 +60,13 @@ module.exports = function (app) {
 
     //Learning Resources
     app.post('/api/esm/teacher/resources', uploadFiles, resources.uploadResource);
+
+    app.post('/api/esm/teacher/resources/upload-ipfs', uploadFiles, resources.uploadResourceToIpfs);
+
+
+    app.route('/api/esm/teacher/resources/upload-ipfs2')
+        .post(resources.uploadResourceToIpfs);
+
 
     app.route('/api/esm/teacher/resources/subject/:subjectCode')
         .get(resources.listResourcesBySubjectCode);
@@ -108,6 +116,7 @@ module.exports = function (app) {
 
     //Submissions Routes
     app.post('/api/esm/submissions/subject', uploadFiles, submissions.submitAssignment);
+    app.post('/api/esm/submissions/subject/ipfs', uploadFiles, submissions.submitAssignmentIpfs);
 
     app.route('/api/esm/submissions/:assignmentId')
         .get(submissions.listSubmissionsByAssignmentId);
