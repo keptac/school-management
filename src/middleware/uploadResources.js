@@ -2,25 +2,26 @@ const multer = require('multer');
 
 var fs = require('fs');
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        // var dir = __dirname + '/../../uploads/'+req.body.subjectCode;
-        var dir = '/'+req.body.subjectCode;
-
-        if (!fs.existsSync(dir)){
-            fs.mkdirSync(dir);
+try {
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            // var dir = __dirname + '/../../uploads/'+req.body.subjectCode;
+            var dir = req.body.subjectCode;
+            if (!fs.existsSync(dir)){
+                fs.mkdirSync(dir);
+            }
+            cb(null, dir)
+        },
+        filename: (req, file, cb) => {
+            cb(null, file.fieldname + "-" + Date.now() + "-" + file.originalname)
         }
+    });
 
-        cb(null, dir)
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + "-" + Date.now() + "-" + file.originalname)
-    }
+    let upload = multer({ storage: storage }).array('vividlearn',15);
+
+    module.exports = upload;
+} catch (error) {
+    console.log(error)
+}
 
 
-    
-});
-
-let upload = multer({ storage: storage }).array('vividlearn',15);
-
-module.exports = upload;

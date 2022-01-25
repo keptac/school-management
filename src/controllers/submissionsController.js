@@ -51,7 +51,8 @@ exports.submitAssignmentIpfs = function (req, res) {
 
 exports.submitAssignment = function (req, res) {
     console.log('\nSubmitting Assignment :::: '+req.body.submissionId);
-    var fileFolder = __dirname + '/../../uploads/'+req.body.submissionId+'/';
+    // var fileFolder = __dirname + '/../../uploads/'+req.body.submissionId+'/';
+    var fileFolder = req.body.submissionId+'/';
     var success = false;
     try{
         req.files.forEach(element => {

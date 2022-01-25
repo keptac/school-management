@@ -30,7 +30,8 @@ exports.uploadAssignmentIpfs = function (req, res) {
 };
 
 exports.uploadAssignment = function (req, res) {
-    var fileFolder = __dirname + '/../../uploads/'+req.body.subjectCode+'/';
+    // var fileFolder = __dirname + '/../../uploads/'+req.body.subjectCode+'/';
+    var fileFolder = req.body.subjectCode+'/';
     try{
         req.files.forEach(element => {
             req.body.assignmentPath = fileFolder + element.filename;
