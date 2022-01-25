@@ -34,7 +34,9 @@ exports.uploadResourceToIpfs = async function(req, res){
 
 exports.uploadResource = function (req, res) {
     console.log('\nUploading Learning Resource:::: '+req.body.subjectCode);
-    var fileFolder = __dirname + '/../../uploads/'+req.body.subjectCode+'/';
+    // var fileFolder = __dirname + '/../../uploads/'+req.body.subjectCode+'/';
+    var fileFolder = req.body.subjectCode+'/';
+
     try{
         req.files.forEach(element => {
             req.body.ext = path.extname(element.filename);

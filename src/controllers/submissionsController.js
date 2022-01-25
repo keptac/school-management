@@ -22,27 +22,16 @@ exports.submissionsForStudent = function(req, res) {
 //Students submits the Assignment - student function
 exports.submitAssignmentIpfs = function (req, res) {
     console.log('\nSubmitting Assignment :::: '+req.body.submissionId);
-    var success = false;
+    console.log(req.body);
     try{
-        req.files.forEach(element => {
-            req.body.ext = path.extname(element.filename);
-            console.log(req.body);
+            req.body.ext = path.extname(req.files[0].filename);
             let new_submission = new Submission(req.body);
             new_submission.save(function (err, submission){
-                console.log('\n>>>>>>>>>> Added Submission >>>>>>>>>\n'+submission);
-                if (err){
-                    res.send(err);
-                }else{
-                    success = true;
-                    console.log('\n>>>>>>>>>> Added Submission >>>>>>>>>\n'+submission);
-                }
+                if (err)
+                    res.send({ "error": "Failed to upload file", reason: err, "message": "Upload failed"});
+                console.log('\nSubmission Upload:::: Completed'+submission);
             });
-        });
-        if(success){
-            return res.status(201).json({success:true, message:"Assignment/Homework submitted"})
-        }else{
-            return res.send({ message:"Upload failed", "error": "Failed to upload assignment" })
-        }
+        return res.status(201).json({success:true, message:"Assignment/Homework submitted"})
     }catch (error){
         console.log(error);
         return res.send({ "error": "Failed to upload assignment", reason: error })
@@ -51,7 +40,8 @@ exports.submitAssignmentIpfs = function (req, res) {
 
 exports.submitAssignment = function (req, res) {
     console.log('\nSubmitting Assignment :::: '+req.body.submissionId);
-    var fileFolder = __dirname + '/../../uploads/'+req.body.submissionId+'/';
+    // var fileFolder = __dirname + '/../../uploads/'+req.body.submissionId+'/';
+    var fileFolder = req.body.submissionId+'/';
     var success = false;
     try{
         req.files.forEach(element => {
@@ -93,7 +83,7 @@ exports.update_submission = function(req, res) {
 
 //View single student assignment
 exports.readSubmission = function(req, res) {
-    Submission.findById(req.params.submissionId, function(err, submission) {
+    Submission.find({submissionId:req.params.submissionId}, function(err, submission) {
         if (err)
             res.send(err);
         res.json(submission);
@@ -102,7 +92,8 @@ exports.readSubmission = function(req, res) {
 
 // Mark student Assignment
 exports.gradeSubmission = function(req, res) {
-    Submission.findOneAndUpdate({_id: req.params.submissionId}, req.body, {new: true}, function(err, submission) {
+    console.log('\n Grading Assignment :::: '+req.params.submissionId);
+    Submission.findOneAndUpdate({submissionId: req.params.submissionId}, req.body, {new: true}, function(err, submission) {
         if (err)
             res.send(err);
         res.json(submission);
@@ -112,7 +103,7 @@ exports.gradeSubmission = function(req, res) {
 
 exports.deleteSubmission = function(req, res) {
     Submission.remove({
-        _id: req.params.submissionId
+        submissionId: req.params.submissionId
     }, function(err, subject) {
         if (err)
             res.send(err);

@@ -121,9 +121,9 @@ module.exports = function (app) {
         .get(submissions.submissionsForStudent)
         .put(submissions.update_submission);
 
-    app.route('/api/esm/submissions/:submissionId')
+    app.route('/api/esm/submissions/student/:submissionId')
         .get(submissions.readSubmission)
-        .put(submissions.gradeSubmission)
+        .post(submissions.gradeSubmission)
         .delete(submissions.deleteSubmission);
 
     //Multiple Choice Questions
