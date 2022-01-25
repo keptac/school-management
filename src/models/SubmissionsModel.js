@@ -30,13 +30,14 @@ var SubmissionSchema = new Schema({
         type: String,
     },
 
-    ext: {
-        type: String
-    },
-
     assignmentId: {
         type: String,
         required: 'Kindly provide the Assignment ID'
+    },
+
+    assignmentTitle: {
+        type: String,
+        required: 'Kindly provide the Assignment Title'
     },
 
     graded: {
@@ -46,11 +47,24 @@ var SubmissionSchema = new Schema({
 
     mark: {
         type: Number,
-        required: 'Kindly enter the mark'
+        default: 0
     },
+
+    total: {
+        type: Number,
+    },
+
     grade: {
         type: String,
-        required: 'Kindly provide the grade for the mark'
+        default: 'UNGRADED'
+    },
+
+    comment: {
+        type: String
+    },
+
+    ext: {
+        type: String
     },
 
     submissionDate: {
