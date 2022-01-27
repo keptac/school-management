@@ -16,10 +16,6 @@ var StudentMarksSchema = new Schema({
         type: String,
         required: 'Kindly enter the studentId'
     },
-    avatarUrl: {
-        type: String,
-        default: '/static/images/avatars/avatar_3.png'
-    },
     subjectCode: {
         type: String,
         required: 'Kindly enter the subject code'
@@ -43,6 +39,10 @@ var StudentMarksSchema = new Schema({
     comment: {
         type: String,
         required: 'Kindly provide the comments'
+    },
+    avatarUrl: {
+        type: String,
+        default: '/static/images/avatars/avatar_3.png'
     },
     createdAt: {
         type: Date
