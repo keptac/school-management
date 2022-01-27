@@ -21,6 +21,9 @@ exports.studentMarksForStudent = function(req, res) {
 //Students submits the Assignment - student function
 exports.submitMarks = function(req, res) {
 
+    console.log("SUBMITING MARKS FOR STUDENT :::::::::::\n\n")
+    console.log(req.body);
+
     var new_marks = new StudentMarks(req.body);
     new_marks.save(function(err, marks) {
         if (err)
