@@ -22,8 +22,6 @@ let StudentAuthSchema = new Schema({
     },
 
     classId: {
-        unique: true,
-        dropDups:true,
         type: String,
         required: 'Kindly enter the Class Id of the student'
     },

@@ -39,7 +39,7 @@ var SubmissionSchema = new Schema({
         type: String,
         required: 'Kindly provide the Assignment Title'
     },
-
+    
     graded: {
         type: Boolean,
         default: false
