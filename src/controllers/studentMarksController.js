@@ -33,7 +33,7 @@ exports.submitMarks = function(req, res) {
 };
 
 exports.deleteStudentMarks = function(req, res) {
-    StudentMarks.remove({
+    StudentMarks.deleteOne({
         _id: req.params.marksId
     }, function(err, subject) {
         if (err)

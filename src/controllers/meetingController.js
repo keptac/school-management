@@ -46,7 +46,7 @@ exports.updateMeeting = function(req, res) {
 };
 
 exports.deleteMeeting = function(req, res) {
-    Meeting.remove({
+    Meeting.deleteOne({
         _id: req.params.subjectId
     }, function(err, subject) {
         if (err)

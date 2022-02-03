@@ -74,7 +74,7 @@ exports.updateResource = function (req, res) {
 };
 
 exports.deleteResource = function (req, res) {
-    Resource.remove({
+    Resource.deleteOne({
         _id: req.params.resourceId
     }, function (err, resource) {
         if (err)

@@ -36,7 +36,7 @@ exports.readTeacherClass = function(req, res) {
 };
 
 exports.deleteTeacherClass = function(req, res) {
-    TeacherClass.remove({
+    TeacherClass.deleteOne({
         _id: req.params.classId
     }, function(err, teacherClass) {
         if (err)

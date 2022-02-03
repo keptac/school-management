@@ -44,7 +44,7 @@ exports.update_an_announcement = function (req, res) {
 };
 
 exports.delete_an_announcement = function (req, res) {
-    Announcements.remove({
+    Announcements.deleteOne({
         _id: req.params.noticeid
     }, function (err, announcement) {
         if (err)
