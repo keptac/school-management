@@ -45,7 +45,7 @@ exports.updateSubject = function(req, res) {
 };
 
 exports.deleteSubject = function(req, res) {
-    Subject.remove({
+    Subject.deleteOne({
         _id: req.params.subjectId
     }, function(err, subject) {
         if (err)

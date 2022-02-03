@@ -20,7 +20,7 @@ exports.addClass = function (req, res) {
 };
 
 exports.deleteClass = function (req, res) {
-    Classes.remove({
+    Classes.deleteOne({
         classId: req.params.classId
     }, function (err, classes) {
         if (err)

@@ -28,6 +28,18 @@ exports.registerStudent = function (req, res) {
     }
 };
 
+exports.updateStudent = function (req, res) {
+    try {
+        console.log('Edit Student Record :::: '+req.body.studentId);
+        Student.findOneAndUpdate({ studentId: req.body.studentId }, req.body, { new: true }, function (err, student) {
+            if (err)
+                res.send({success:false, message:"A student with that ID already exists.", error:err});
+            res.json({success:true, message:"Student Register successfully."});
+        });
+    } catch (error) {
+        res.send({success:false, message:"An error occured please contact admin", error:err});
+    }
+};
 
 exports.batchStudentsRegister= function (req, res) {
     batchRegisterStudents(req.file.filename,req, res );
@@ -60,6 +72,16 @@ exports.listStudentsPerClass = function (req, res) {
     });
 };
 
+exports.deleteStudent = function(req, res) {
+    console.log('Deleting Student Record:::: '+req.param.email);
+    Student.deleteOne({
+        studentId: req.params.studentId
+    }, function(err, student) {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Student records successfully deleted' });
+    });
+};
 
 exports.studentAuthentication = async function (req, res) {
     console.log('Authentication:::: '+req.body.email);
