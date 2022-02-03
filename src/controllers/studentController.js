@@ -60,6 +60,16 @@ exports.listStudentsPerClass = function (req, res) {
     });
 };
 
+exports.deleteStudent = function(req, res) {
+    console.log('Deleting Student Record:::: '+req.param.email);
+    Student.deleteOne({
+        studentId: req.params.studentId
+    }, function(err, student) {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Student records successfully deleted' });
+    });
+};
 
 exports.studentAuthentication = async function (req, res) {
     console.log('Authentication:::: '+req.body.email);

@@ -157,7 +157,10 @@ module.exports = function (app) {
         .get(students.readStudent)
         
     app.route('/api/esm/students/class/:classId')
-        .get( students.listStudentsPerClass)    
+        .get( students.listStudentsPerClass)
+    
+    app.route('/api/esm/students/delete/:studentId')
+        .get(students.deleteStudent)
     
     //Student Marks Routes
     app.route('/api/esm/studentMarks')
