@@ -36,16 +36,16 @@ exports.read_an_announcement = function (req, res) {
 };
 
 exports.update_an_announcement = function (req, res) {
-    Announcements.findOneAndUpdate({ announcementId: req.params.announcementId }, req.body, { new: true }, function (err, announcement) {
+    Announcements.findOneAndUpdate({ _id: req.body.noticeId }, req.body, { new: true }, function (err, announcement) {
         if (err)
             res.send(err);
-        res.json(announcement);
+        res.json({ message: 'Announcements successfully updated' });
     });
 };
 
 exports.delete_an_announcement = function (req, res) {
     Announcements.remove({
-        _id: req.params.announcementId
+        _id: req.params.noticeid
     }, function (err, announcement) {
         if (err)
             res.send(err);

@@ -36,10 +36,12 @@ module.exports = function (app) {
     app.route('/api/esm/announcements/:target')
         .get(announcements.listAnnouncementsByTarget)
 
-    app.route('/api/esm/accouncements/:announcementId')
-        .get(announcements.read_an_announcement)
-        .put(announcements.update_an_announcement)
+    app.route('/api/esm/announcements/update')
+        .post(announcements.update_an_announcement)
         .delete(announcements.delete_an_announcement);
+    
+        app.route('/api/esm/announcements/delete/:noticeid')
+        .get(announcements.delete_an_announcement);
 
     //Assignments
     app.post('/api/esm/teacher/assignments', uploadFiles, assignments.uploadAssignment);
