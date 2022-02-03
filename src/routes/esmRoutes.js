@@ -95,8 +95,13 @@ module.exports = function (app) {
 
     app.route('/api/esm/subjects/:subjectId')
         .get(subjects.readSubject)
-        .put(subjects.updateSubject)
-        .delete(subjects.deleteSubject);
+
+
+    app.route('/api/esm/subjects/update/:subjectId')
+        .get(subjects.updateSubject)
+
+    app.route('/api/esm/subjects/delete/:subjectId')
+        .get(subjects.deleteSubject)
     
     //Teacher Routes
     app.route('/api/esm/teacherClasses')
@@ -179,8 +184,8 @@ module.exports = function (app) {
         .get( classes.listClasses)
         .post( classes.addClass);
 
-    app.route('/api/esm/class/:classId')
-        .delete( classes.deleteClass)
+    app.route('/api/esm/class/delete/:classId')
+        .get( classes.deleteClass)
 
     // Subjects Routes
     app.route('/api/esm/subjects')
