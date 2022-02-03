@@ -28,3 +28,17 @@ exports.deleteClass = function (req, res) {
         res.json({ message: 'Classes successfully deleted' });
     });
 };
+
+
+exports.updateClass = function (req, res) {
+    try {
+        console.log('Edit Student Record :::: '+req.body.classId);
+        Classes.findOneAndUpdate({ classId: req.body.classId }, req.body, { new: true }, function (err, classe) {
+            if (err)
+                res.send({success:false, message:"Failed to update class", error:err});
+            res.json({success:true, message:"Class update successful."});
+        });
+    } catch (error) {
+        res.send({success:false, message:"An error occured please contact admin", error:err});
+    }
+};

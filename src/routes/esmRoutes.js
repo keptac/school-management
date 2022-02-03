@@ -193,6 +193,9 @@ module.exports = function (app) {
     app.route('/api/esm/class/delete/:classId')
         .get( classes.deleteClass)
 
+    app.route('/api/esm/class/update')
+        .post( classes.updateClass);
+
     // Subjects Routes
     app.route('/api/esm/subjects')
         .get( subjects.listSubjects)
