@@ -55,7 +55,7 @@ exports.enrolForSubject = function (req, res) {
 };
 
 exports.deleteStudentEnrolment = function (req, res) {
-    StudentEnrolment.remove({
+    StudentEnrolment.deleteOne({
         _id: req.params.studentEnrolmentId
     }, function (err, studentEnrolment) {
         if (err)

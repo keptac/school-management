@@ -67,7 +67,7 @@ exports.updateAssignment = function (req, res) {
 };
 
 exports.deleteAssignment = function (req, res) {
-    Assignment.remove({
+    Assignment.deleteOne({
         _id: req.params.assignmentId
     }, function (err, assignment) {
         if (err)

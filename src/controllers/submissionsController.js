@@ -102,7 +102,7 @@ exports.gradeSubmission = function(req, res) {
 
 
 exports.deleteSubmission = function(req, res) {
-    Submission.remove({
+    Submission.deleteOne({
         submissionId: req.params.submissionId
     }, function(err, subject) {
         if (err)

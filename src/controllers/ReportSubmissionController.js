@@ -33,7 +33,7 @@ exports.addReportSubmission = function (req, res) {
 };
 
 exports.deleteReportSubmission = function (req, res) {
-    ReportSubmission.remove({
+    ReportSubmission.deleteOne({
         _id: req.params.subjectCode
     }, function (err, subject) {
         if (err)
