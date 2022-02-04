@@ -16,7 +16,6 @@ var SubjectSchema = new Schema({
         type: Number,
         required: 'Kindly enter the grade'
     },
-
     teacherId: {
         type: String,
         required: 'Kindly enter the Teacher for the subject'
