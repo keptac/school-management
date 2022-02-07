@@ -110,12 +110,15 @@ module.exports = function (app) {
         .get( teacherClasses.listTeacherClasses)
         .post( teacherClasses.createTeacherClass);
     
+    app.route('/api/esm/teacherClasses/delete/:subjectCode/:teacherId')
+        .get( teacherClasses.deleteTeacherClass);
+    
     app.route('/api/esm/teacherClasses/teacher/:teacherId')
         .get( teacherClasses.listTeacherClassPerTeacher);
     
     app.route('/api/esm/teacherClasses/:classId')
         .get( teacherClasses.readTeacherClass)
-        .delete( teacherClasses.deleteTeacherClass);
+       
 
     //Submissions Routes
     app.post('/api/esm/submissions/subject', uploadFiles, submissions.submitAssignment);

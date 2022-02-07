@@ -37,10 +37,11 @@ exports.readTeacherClass = function(req, res) {
 
 exports.deleteTeacherClass = function(req, res) {
     TeacherClass.deleteOne({
-        _id: req.params.classId
+        subjectCode: req.params.subjectCode,
+        teacherId: req.params.teacherId
     }, function(err, teacherClass) {
         if (err)
             res.send(err);
-        res.json({ message: 'TeacherClass successfully deleted' });
+        res.json({ message: 'Teacher Class successfully deleted' });
     });
 };
