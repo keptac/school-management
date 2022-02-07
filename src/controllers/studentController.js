@@ -83,7 +83,13 @@ exports.deleteStudent = function(req, res) {
     }, function(err, student) {
         if (err)
             res.send(err);
-        res.json({ message: 'Student records successfully deleted' });
+        StudentAuth.deleteOne({
+            studentId: req.params.studentId
+        }, function(err, student) {
+            if (err)
+                res.send(err);
+            res.json({ message: 'Student records successfully deleted' });
+        });
     });
 };
 
