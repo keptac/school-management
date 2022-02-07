@@ -129,7 +129,7 @@ exports.studentAuthentication = async function (req, res) {
 };
 
 exports.studentPasswordReset = async function (req, res) {
-    console.log('Password Reset Student :::: '+req.body.studentId);
+    console.log('Password Reset Student :::: '+req.body.email);
     try {
         const { email, oldPassword, newPassword } = req.body;
         const user = await StudentAuth.findOne({ email });
@@ -139,7 +139,23 @@ exports.studentPasswordReset = async function (req, res) {
             StudentAuth.findOneAndUpdate({ studentId: user.studentId }, {password: secureNewPassword, passwordReset: false}, { new: true }, function (err, student) {
                 if (err)
                     res.send({success:false, message:"Failed to update password. Please contact Adminstrator", error:err});
-                res.json({success:true, message:"Password changed successfully."});
+
+                const token = jwt.sign(
+                    { user_id: user._id, email },
+                    process.env.TOKEN_KEY,
+                    {
+                        expiresIn: "2h",
+                    }
+                );
+                const userBody = {
+                    email:user.email,
+                    name: user.firstName + ' ' + user.surname,
+                    userType: user.userType,
+                    studentId: user.studentId,
+                    classId: user.classId,
+                    token: token,
+                }
+                res.status(201).json({success:true, message:'Password changed successfully.', user:userBody})
             });
         }else{
             res.json({success:false, message:'The Old Password entered is incorrect.', error:"Invalid Email or password"})
