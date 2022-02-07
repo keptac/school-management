@@ -131,14 +131,21 @@ exports.studentAuthentication = async function (req, res) {
 exports.studentPasswordReset = async function (req, res) {
     console.log('Password Reset Student :::: '+req.body.studentId);
     try {
-        req.body.password =  await bcrypt.hash(req.body.password, 10);
+        const { email, oldPassword, newPassword } = req.body;
+        const user = await StudentAuth.findOne({ email });
 
-        StudentAuth.findOneAndUpdate({ studentId: req.body.studentId }, req.body, { new: true }, function (err, student) {
-            if (err)
-                res.send({success:false, message:"Failed to update password. Please contact Adminstrator", error:err});
-            res.json({success:true, message:"Password changed successfully."});
-        });
+        if (user && (await bcrypt.compare(oldPassword, user.password))) {
+            const secureNewPassword =  await bcrypt.hash(newPassword, 10);
+            StudentAuth.findOneAndUpdate({ studentId: user.studentId }, {password: secureNewPassword}, { new: true }, function (err, student) {
+                if (err)
+                    res.send({success:false, message:"Failed to update password. Please contact Adminstrator", error:err});
+                res.json({success:true, message:"Password changed successfully."});
+            });
+        }else{
+            res.json({success:false, message:'The Old Password entered is incorrect.', error:"Invalid Email or password"})
+        }
     } catch (error) {
+        console.log('Password Reset Student Failed :::: '+err);
         res.send({success:false, message:"An error occured please contact admin", error:err});
     }
 };
