@@ -148,6 +148,9 @@ module.exports = function (app) {
     app.route('/api/esm/student/authenticate')
         .post(students.studentAuthentication);
 
+    app.route('/api/esm/student/passwordReset')
+        .post(students.studentPasswordReset);
+
     app.route('/api/esm/student/authenticateReg')
         .post(students.registerStudentAuth);
 

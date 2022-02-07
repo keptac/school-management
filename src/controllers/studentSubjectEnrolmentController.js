@@ -21,7 +21,7 @@ exports.listStudentEnrolmentsPerSubject = function (req, res) {
 };
 
 exports.listEnrolmentsPerStudent = function (req, res) {
-    console.log('All Students Subjects :::: '+req.params.classId);
+    console.log('All Students Subjects for class :::: '+req.params.classId);
     TeacherClasses.find({ classId: req.params.classId }, function (err, studentEnrolment) {
         if (err)
             res.send(err);

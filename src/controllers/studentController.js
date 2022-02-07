@@ -34,7 +34,11 @@ exports.updateStudent = function (req, res) {
         Student.findOneAndUpdate({ studentId: req.body.studentId }, req.body, { new: true }, function (err, student) {
             if (err)
                 res.send({success:false, message:"A student with that ID already exists.", error:err});
-            res.json({success:true, message:"Student Register successfully."});
+            StudentAuth.findOneAndUpdate({ studentId: req.body.studentId }, req.body, { new: true }, function (err, student) {
+                if (err)
+                    res.send({success:false, message:"A student with that ID already exists.", error:err});
+                res.json({success:true, message:"Student Register successfully."});
+            });
         });
     } catch (error) {
         res.send({success:false, message:"An error occured please contact admin", error:err});
@@ -79,7 +83,13 @@ exports.deleteStudent = function(req, res) {
     }, function(err, student) {
         if (err)
             res.send(err);
-        res.json({ message: 'Student records successfully deleted' });
+        StudentAuth.deleteOne({
+            studentId: req.params.studentId
+        }, function(err, student) {
+            if (err)
+                res.send(err);
+            res.json({ message: 'Student records successfully deleted' });
+        });
     });
 };
 
@@ -105,7 +115,8 @@ exports.studentAuthentication = async function (req, res) {
                 userType: user.userType,
                 studentId: user.studentId,
                 classId: user.classId,
-                token: token
+                token: token,
+                passwordReset: user.passwordReset
             }
             res.status(201).json({success:true, message:'Authentication successful', user:userBody})
         }else{
@@ -114,6 +125,44 @@ exports.studentAuthentication = async function (req, res) {
     } catch (err) {
         console.log(err);
         res.send({success:false,message:"Snap, something happened. Please contact the Admin or your helpdesk.", error:error});
+    }
+};
+
+exports.studentPasswordReset = async function (req, res) {
+    console.log('Password Reset Student :::: '+req.body.email);
+    try {
+        const { email, oldPassword, newPassword } = req.body;
+        const user = await StudentAuth.findOne({ email });
+
+        if (user && (await bcrypt.compare(oldPassword, user.password))) {
+            const secureNewPassword =  await bcrypt.hash(newPassword, 10);
+            StudentAuth.findOneAndUpdate({ studentId: user.studentId }, {password: secureNewPassword, passwordReset: false}, { new: true }, function (err, student) {
+                if (err)
+                    res.send({success:false, message:"Failed to update password. Please contact Adminstrator", error:err});
+
+                const token = jwt.sign(
+                    { user_id: user._id, email },
+                    process.env.TOKEN_KEY,
+                    {
+                        expiresIn: "2h",
+                    }
+                );
+                const userBody = {
+                    email:user.email,
+                    name: user.firstName + ' ' + user.surname,
+                    userType: user.userType,
+                    studentId: user.studentId,
+                    classId: user.classId,
+                    token: token,
+                }
+                res.status(201).json({success:true, message:'Password changed successfully.', user:userBody})
+            });
+        }else{
+            res.json({success:false, message:'The Old Password entered is incorrect.', error:"Invalid Email or password"})
+        }
+    } catch (error) {
+        console.log('Password Reset Student Failed :::: '+err);
+        res.send({success:false, message:"An error occured please contact admin", error:err});
     }
 };
 
