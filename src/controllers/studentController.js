@@ -136,7 +136,7 @@ exports.studentPasswordReset = async function (req, res) {
 
         if (user && (await bcrypt.compare(oldPassword, user.password))) {
             const secureNewPassword =  await bcrypt.hash(newPassword, 10);
-            StudentAuth.findOneAndUpdate({ studentId: user.studentId }, {password: secureNewPassword}, { new: true }, function (err, student) {
+            StudentAuth.findOneAndUpdate({ studentId: user.studentId }, {password: secureNewPassword, passwordReset: false}, { new: true }, function (err, student) {
                 if (err)
                     res.send({success:false, message:"Failed to update password. Please contact Adminstrator", error:err});
                 res.json({success:true, message:"Password changed successfully."});
