@@ -115,7 +115,8 @@ exports.studentAuthentication = async function (req, res) {
                 userType: user.userType,
                 studentId: user.studentId,
                 classId: user.classId,
-                token: token
+                token: token,
+                passwordReset: user.passwordReset
             }
             res.status(201).json({success:true, message:'Authentication successful', user:userBody})
         }else{
@@ -124,6 +125,21 @@ exports.studentAuthentication = async function (req, res) {
     } catch (err) {
         console.log(err);
         res.send({success:false,message:"Snap, something happened. Please contact the Admin or your helpdesk.", error:error});
+    }
+};
+
+exports.studentPasswordReset = async function (req, res) {
+    console.log('Password Reset Student :::: '+req.body.studentId);
+    try {
+        req.body.password =  await bcrypt.hash(req.body.password, 10);
+
+        StudentAuth.findOneAndUpdate({ studentId: req.body.studentId }, req.body, { new: true }, function (err, student) {
+            if (err)
+                res.send({success:false, message:"Failed to update password. Please contact Adminstrator", error:err});
+            res.json({success:true, message:"Password changed successfully."});
+        });
+    } catch (error) {
+        res.send({success:false, message:"An error occured please contact admin", error:err});
     }
 };
 
