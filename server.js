@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 
-var app = express(), port = process.env.PORT, mongoose = require('mongoose');
+var app = express(), port = 3001||process.env.PORT, mongoose = require('mongoose');
 
 //Register Models
 const announcement = require('./src/models/AnnouncementsModel');
