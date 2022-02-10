@@ -117,7 +117,8 @@ exports.studentAuthentication = async function (req, res) {
 
             const token = jwt.sign(
                 { user_id: user._id, email },
-                process.env.TOKEN_KEY,
+                // process.env.TOKEN_KEY,
+                'W35TmiS736-/*',
                 {
                     expiresIn: "2h",
                 }
@@ -155,7 +156,8 @@ exports.studentPasswordReset = async function (req, res) {
 
                 const token = jwt.sign(
                     { user_id: user._id, email },
-                    process.env.TOKEN_KEY,
+                    // process.env.TOKEN_KEY,
+                    'W35TmiS736-/*',
                     {
                         expiresIn: "2h",
                     }

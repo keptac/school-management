@@ -33,7 +33,13 @@ var allowCrossDomain = function(req, res, next) {
 }
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.DATABASE_URL_DEV,{
+// mongoose.connect('process.env.DATABASE_URL_DEV',{
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false,
+//     useCreateIndex: true
+// }); 
+mongoose.connect('mongodb+srv://mtgsuser:pass_123@cluster0.jw8nx.mongodb.net/mtgsElearning?retryWrites=true&w=majority',{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
