@@ -161,6 +161,9 @@ module.exports = function (app) {
         .get(students.listStudents)
         .post(students.registerStudent);
 
+    app.route('/api/esm/students/update/class')
+        .post(students.updateStudentClass);
+
     app.route('/api/esm/students/update')
         .post(students.updateStudent);
 
