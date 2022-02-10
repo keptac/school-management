@@ -33,11 +33,11 @@ exports.updateStudent = function (req, res) {
         console.log('Edit Student Record :::: '+req.body.studentId);
         Student.findOneAndUpdate({ studentId: req.body.studentId }, req.body, { new: true }, function (err, student) {
             if (err)
-                res.send({success:false, message:"A Failed to update Records", error:err});
+                res.send({success:false, message:"Failed to update records please try again later", error:err});
             res.json({success:true, message:"Student Record update successful."});
         });
     } catch (error) {
-        res.send({success:false, message:"An error occured please contact admin", error:err});
+        res.send({success:false, message:"An error occured please contact admin.", error:err});
     }
 };
 
@@ -46,11 +46,11 @@ exports.updateStudentClass = function (req, res) {
         console.log('Edit Student Record :::: '+req.body.studentId);
         Student.findOneAndUpdate({ studentId: req.body.studentId }, req.body, { new: true }, function (err, student) {
             if (err)
-                res.send({success:false, message:"A student with that ID already exists.", error:err});
+                res.send({success:false, message:"Failed to update please try again later", error:err});
             StudentAuth.findOneAndUpdate({ studentId: req.body.studentId }, req.body, { new: true }, function (err, student) {
                 if (err)
-                    res.send({success:false, message:"A student with that ID already exists.", error:err});
-                res.json({success:true, message:"Student Register successfully."});
+                    res.send({success:false, message:"Failed to update auntentication records. Please try again later", error:err});
+                res.json({success:true, message:"Student Record update successful."});
             });
         });
     } catch (error) {
