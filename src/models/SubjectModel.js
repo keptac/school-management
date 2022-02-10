@@ -10,6 +10,8 @@ var SubjectSchema = new Schema({
 
     subjectCode: {
         type: String,
+        unique: true,
+        dropDups: true
     },
 
     level: {
