@@ -45,6 +45,12 @@ let StaffSchema = new Schema({
         type: String,
         required: 'Kindly enter the user Type'
     },
+    
+    disability: {
+        type: String,
+        default: 'NA'
+    },
+
     dateJoined: {
         type: Date,
         default: Date.now

@@ -20,10 +20,19 @@ exports.listTeacherClassPerTeacher = function(req, res) {
 
 exports.createTeacherClass = function(req, res) {
     let new_teacherClass = new TeacherClass(req.body);
-    new_teacherClass.save(function(err, teacherClass) {
+
+    TeacherClass.find({teacherId:req.body.teacherId, subjectCode: req.body.subjectCode}, function(err, subject) {
         if (err)
-            res.send({success:false, message:"An error occured please contact admin", error:err});
-        res.json({success:true, message:"Class created successfully."});
+            res.send(err);
+        if(subject.length>0){
+            res.send({success:false, message:"Subject already configured", error:err});
+        }else{
+            new_teacherClass.save(function(err, teacherClass) {
+                if (err)
+                    res.send({success:false, message:"An error occured please contact admin", error:err});
+                res.json({success:true, message:"Class subject added successfully."});
+            });
+        }
     });
 };
 
@@ -37,10 +46,11 @@ exports.readTeacherClass = function(req, res) {
 
 exports.deleteTeacherClass = function(req, res) {
     TeacherClass.deleteOne({
-        _id: req.params.classId
+        subjectCode: req.params.subjectCode,
+        teacherId: req.params.teacherId
     }, function(err, teacherClass) {
         if (err)
             res.send(err);
-        res.json({ message: 'TeacherClass successfully deleted' });
+        res.json({ message: 'Teacher Class successfully deleted' });
     });
 };

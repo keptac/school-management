@@ -21,10 +21,19 @@ exports.listSubjectsPerTeacher = function(req, res) {
 exports.createSubject = function (req, res) {
     console.log('Subject Creation :::: '+req.body.subjectName+' '+req.body.subjectCode);
     let newSubject = new Subject(req.body);
-    newSubject.save(function (err, subjects) {
+
+    Subject.find({subjectName:req.body.subjectName, level: req.body.level}, function(err, subject) {
         if (err)
-            res.send({success:false, message:"An error occured please contact admin", error:err});
-        res.json({success:true, message:"Subject added successfully."});
+            res.send(err);
+        if(subject.length>0){
+            res.send({success:false, message:"Subject already configured", error:err});
+        }else{
+            newSubject.save(function (err, subjects) {
+                if (err)
+                    res.send({success:false, message:"An error occured please contact admin", error:err});
+                res.json({success:true, message:"Subject added successfully."});
+            });
+        }
     });
 };
 

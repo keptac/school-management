@@ -6,7 +6,9 @@ var ClassSchema = new Schema({
 
     classId: {
         type: String,
-        required: 'Kindly enter the class ID'
+        required: 'Kindly enter the class ID',
+        unique: true,
+        dropDups: true
     },
 
     className: {

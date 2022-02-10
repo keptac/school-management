@@ -60,6 +60,10 @@ let StudentSchema = new Schema({
             enum: ['MALE', 'FEMALE','']
         }],
     },
+    disability: {
+        type: String,
+        default: 'NA'
+    },
     classId: {
         type: String,
         required: 'Kindly select class of the student'
