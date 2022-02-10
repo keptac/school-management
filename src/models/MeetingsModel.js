@@ -31,6 +31,10 @@ let MeetingSchema = new Schema({
         required: 'Kindly enter the meeting Date'
     },
 
+    meetingTime: {
+        type: String,
+    },
+
     teacherName:{
         type: String,
         required: 'Teacher Name Required'
