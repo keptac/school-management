@@ -192,14 +192,21 @@ exports.registerStudentAuth = async function (req, res) {
             req.body.password = encryptedPassword;
     
             var newStudent = new StudentAuth(req.body);
-            newStudent.save(function (err, staff) {
-                if (err){
-                    console.log(err);
-                    res.status(400).send({success:false,message:"Registration failed. Please contact the Admin or your helpdesk.", error:error});
-                }else{
-                    res.json({success:true, message:"Account has been created successfully. Please login to activate account"});
-                }
-            });
+
+            try {
+                newStudent.save(function (err, staff) {
+                    if (err){
+                        console.log(err);
+                        res.status(400).send({success:false,message:"Registration failed. Please contact the Admin or your helpdesk.", error:error});
+                    }else{
+                        res.json({success:true, message:"Account has been created successfully. Please login to activate account"});
+                    }
+                });
+            } catch (error) {
+                console.log(error);
+                res.status(200).send({success:false,message:"Registration failed. Please contact the Admin or your helpdesk.", error:error});
+            }
+            
         }
     } catch (error) {
         console.log("Snap Error in registration "+ error);

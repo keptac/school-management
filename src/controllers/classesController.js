@@ -11,14 +11,13 @@ exports.listClasses = function (req, res) {
 };
 
 exports.addClass = function (req, res) {
-    let newClass = new Classes(req.body);
-
-    newClass.find({className:req.body.className, station: req.body.station}, function(err, classes) {
+    Classes.find({className:req.body.className, station: req.body.station}, function(err, classes) {
         if (err)
             res.send(err);
         if(classes.length>0){
             res.send({success:false, message:"Class already configured", error:err});
         }else{
+            let newClass = new Classes(req.body);
             newClass.save(function (err, classes) {
                 if (err)
                     res.send({success:false, message:"An error occured please contact admin", error:err});
