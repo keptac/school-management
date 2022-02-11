@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 
-var app = express(), port = 3001||process.env.PORT, mongoose = require('mongoose');
+var app = express(), port = process.env.PORT, mongoose = require('mongoose');
 
 //Register Models
 const announcement = require('./src/models/AnnouncementsModel');
@@ -33,13 +33,7 @@ var allowCrossDomain = function(req, res, next) {
 }
 
 mongoose.Promise = global.Promise;
-// mongoose.connect('process.env.DATABASE_URL_DEV',{
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false,
-//     useCreateIndex: true
-// }); 
-mongoose.connect('mongodb+srv://mtgsuser:pass_123@cluster0.jw8nx.mongodb.net/mtgsElearning?retryWrites=true&w=majority',{
+mongoose.connect(process.env.DATABASE_URL_DEV,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
