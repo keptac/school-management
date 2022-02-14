@@ -22,8 +22,7 @@ let StudentAuthSchema = new Schema({
     },
 
     classId: {
-        type: String,
-        required: 'Kindly enter the Class Id of the student'
+        type: String
     },
 
     email: {
