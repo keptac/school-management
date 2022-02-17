@@ -10,6 +10,14 @@ exports.listTeacherClasses = function(req, res) {
     });
 };
 
+exports.listTeacherClassesBySubjectCode = function(req, res) {
+    TeacherClass.find({subjectCode: req.params.subjectCode}, function(err, teacherClass) {
+        if (err)
+            res.send(err);
+        res.json(teacherClass);
+    });
+};
+
 exports.listTeacherClassPerTeacher = function(req, res) {
     TeacherClass.find({teacherId:req.params.teacherId}, function(err, teacherClass) {
         if (err)

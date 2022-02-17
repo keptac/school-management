@@ -37,3 +37,34 @@ exports.getPaymentsByStudent = function (req, res) {
     });
 };
 
+exports.getSumOfAmounts = function (req, res) {
+    console.log('Requesting for all sum of payments for term :::: '+req.params.term);
+    // Payment.aggregate([{
+    //     $match : { $and : [ {term: req.params.term}] },
+    // },{
+    //     $group : {
+    //         _id : null,
+    //         total : {
+    //             $sum : "$amount"
+    //         }
+    //     }
+    // }])
+
+    Payment.aggregate([
+        {
+            $match : { $and : [ {term: req.params.term}] }
+        },
+        {
+        $group: {
+            totalValue : {
+                $sum: "$value"
+            }
+        }
+        }], function(err, result) {
+            if (err) return console.dir(err)
+        
+            console.log(result);
+        }
+    );
+};
+
