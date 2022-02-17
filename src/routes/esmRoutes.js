@@ -121,8 +121,6 @@ module.exports = function (app) {
 
     app.route('/api/esm/teacherClasses/subject/:subjectCode')
         .get( teacherClasses.listTeacherClassesBySubjectCode)
-       
-        listTeacherClassesBySubjectCode
 
     //Submissions Routes
     app.post('/api/esm/submissions/subject', uploadFiles, submissions.submitAssignment);
