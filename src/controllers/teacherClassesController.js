@@ -33,12 +33,20 @@ exports.createTeacherClass = function(req, res) {
         if (err)
             res.send(err);
         if(subject.length>0){
-            res.send({success:false, message:"Subject already configured", error:err});
+            res.send({success:false, message:"You configured the subject already.", error:err});
         }else{
-            new_teacherClass.save(function(err, teacherClass) {
+            TeacherClass.find({classId:req.body.classId, subjectCode: req.body.subjectCode}, function(err, subjectAlloc) {
                 if (err)
-                    res.send({success:false, message:"An error occured please contact admin", error:err});
-                res.json({success:true, message:"Class subject added successfully."});
+                    res.send(err);
+                if(subjectAlloc.length>0){
+                    res.send({success:false, message:"Subject was claimed by another teacher.", error:err});
+                }else{
+                    new_teacherClass.save(function(err) {
+                        if (err)
+                            res.send({success:false, message:"An error occured please contact admin", error:err});
+                        res.json({success:true, message:"Class subject added successfully."});
+                    });
+                }
             });
         }
     });
