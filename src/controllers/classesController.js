@@ -3,10 +3,10 @@ let mongoose = require('mongoose'), Classes = mongoose.model('Classes');
 
 //Classes
 exports.listClasses = function (req, res) {
-    Classes.find({ }, function (err, assignment) {
+    Classes.find({ }, function (err, classes) {
         if (err)
             res.send(err);
-        res.json(assignment);
+        res.json(classes);
     });
 };
 

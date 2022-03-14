@@ -118,7 +118,9 @@ module.exports = function (app) {
     
     app.route('/api/esm/teacherClasses/:classId')
         .get( teacherClasses.readTeacherClass)
-       
+
+    app.route('/api/esm/teacherClasses/subject/:subjectCode')
+        .get( teacherClasses.listTeacherClassesBySubjectCode)
 
     //Submissions Routes
     app.post('/api/esm/submissions/subject', uploadFiles, submissions.submitAssignment);
@@ -244,6 +246,9 @@ module.exports = function (app) {
     app.route('/api/esm/payments')
         .get(payments.listPayments)
         .post(payments.addNewPayment);
+
+    app.route('/api/esm/payments/sum/:term')
+        .get(payments.getSumOfAmounts)
 
     app.route('/api/esm/payments/student/:studentId')
         .get(payments.getPaymentsByStudent)

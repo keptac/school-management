@@ -186,7 +186,7 @@ exports.registerStudentAuth = async function (req, res) {
         const oldUser = await StudentAuth.findOne({email});
     
         if (oldUser) {
-            return res.status(409).send({success:false, message:"User Already Exist. Please Login"});
+            return res.send({success:false, message:"User Already Exist. Please Login"});
         }else{
             var encryptedPassword = await bcrypt.hash(password, 10);
             req.body.password = encryptedPassword;
@@ -197,7 +197,7 @@ exports.registerStudentAuth = async function (req, res) {
                 newStudent.save(function (err, staff) {
                     if (err){
                         console.log(err);
-                        res.status(400).send({success:false,message:"Registration failed. Please contact the Admin or your helpdesk.", error:error});
+                        res.send({success:false,message:"Registration failed. Please contact the Admin or your helpdesk.", error:error});
                     }else{
                         res.json({success:true, message:"Account has been created successfully. Please login to activate account"});
                     }
